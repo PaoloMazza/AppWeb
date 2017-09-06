@@ -40,6 +40,7 @@ public class AggiuntaFarmacia extends Action {
 
         ResultSet resultSet2 = database.ExecuteQuery("SELECT * FROM Dipendente WHERE CFdipendente = '"+farmacia.getCFtitolare()+"'");
 
+        //SE NON ESISTE
         if(resultSet2.isBeforeFirst()){
             System.out.println("Titolare già presente come dipendente di una farmacia");
             request.setAttribute("exitCode","Titolare già presente come dipendente di una farmacia");

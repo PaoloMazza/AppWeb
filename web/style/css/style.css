@@ -8,7 +8,7 @@ body{
     src: url(style/fonts/Orbitron/Orbitron-Black.ttf);
 }
 
-ul {
+#UL {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -28,7 +28,7 @@ li a {
     text-decoration: none;
 }
 
-li a:hover {
+#UL a:hover {
     background-color: #111;
 }
 

@@ -17,7 +17,7 @@
 <body vlink="white">
 
 <div>
-    <ul>
+    <ul id="UL">
         <li><a class="active" href="sito.html">Home</a></li>
         <li><a class="active" href="comeAccedere.html">Come accedere</a>
         <li><a class="active" href="sito.html">Informazioni</a></li>
@@ -39,7 +39,7 @@
         First name:<br>
         <input type="text" name="CFTitolare" style="border-radius: 10px; width: 30%;"><br>
         Last name:<br>
-        <input type="text" name="Password" style="border-radius: 10px; width: 30%;"><br>
+        <input type="password" name="Password" style="border-radius: 10px; width: 30%;"><br>
         <input type="submit" value="LOGIN" style = "margin-top: 15px">
     </form>
 </div>

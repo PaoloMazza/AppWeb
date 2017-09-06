@@ -8,10 +8,21 @@
 
     <form-beans>
         <form-bean name="CreazioneFarmacia" type="Beans.Farmacia"></form-bean>
+        <form-bean name="Login" type="Beans.Login"></form-bean>
+        <form-bean name="InserimentoDipendente" type="Beans.Dipendente"></form-bean>
     </form-beans>
 
     <action-mappings>
         <action path="/enter" name="CreazioneFarmacia" type="Actions.AggiuntaFarmacia">
+            <forward name="SUCCESS" path="/jsp/greetings.jsp" />
+            <forward name="ERROR" path="/jsp/greetings.jsp" />
+        </action>
+        <action path="/Login" name="Login" type="Actions.LoginAction">
+            <forward name="SUCCESS" path="/jsp/HomeTitolare.jsp"/>
+            <forward name="ERROR" path="/jsp/Bad%20Login.html" />
+        </action>
+
+        <action path="/inserimentoDipendente" name="InserimentoDipendente" type="Actions.AggiuntaDipendente">
             <forward name="SUCCESS" path="/jsp/greetings.jsp" />
             <forward name="ERROR" path="/jsp/greetings.jsp" />
         </action>

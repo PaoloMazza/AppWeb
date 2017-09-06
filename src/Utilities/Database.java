@@ -1,5 +1,6 @@
 package Utilities;
 
+import Beans.Dipendente;
 import Beans.Farmacia;
 
 import java.sql.*;
@@ -69,14 +70,9 @@ public class Database {
             psm.setString(1, farmacia.getNomeFarmacia());
             psm.setString(2,farmacia.getIndirizzo());
             psm.setString(3,farmacia.getTelefono());
-            resultSet=psm.executeQuery();
+            return psm.executeQuery().isBeforeFirst();
 
-            if(resultSet.isBeforeFirst())
-                return true;
-
-            return false;
         }
-
 
 
     public void CreatePharmacy(Farmacia farmacia) throws SQLException {
@@ -116,8 +112,42 @@ public class Database {
 
         Statement magazzino = conn.createStatement();
         magazzino.executeUpdate(query);
-
     }
+
+    //METODI PER IL LOGIN
+
+    public ResultSet Login(String CF, String Password) throws SQLException {
+        String query =  "SELECT DISTINCT * FROM Dipendente WHERE CFdipendente = ? AND Password = ?";
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        preparedStatement.setString(1,CF);
+        preparedStatement.setString(2,Password);
+        return preparedStatement.executeQuery();
+    }
+
+    //METODI PER L'INSERIMENTO DELL'UTENTE
+
+    public boolean UserExists(String CF) throws SQLException {
+        String query = "SELECT DISTINCT * FROM Dipendente WHERE CFdipendente = ?";
+        PreparedStatement psm = conn.prepareStatement(query);
+        psm.setString(1, CF);
+        return psm.executeQuery().isBeforeFirst();
+    }
+
+
+    public void insertUser(Dipendente dipendente) throws SQLException {
+        String titolare = "INSERT INTO Dipendente Values (?,?,?,?,?,?,?,?)";
+        PreparedStatement psm2  = conn.prepareStatement(titolare);
+        psm2.setString(1,dipendente.getCF());
+        psm2.setInt(2, 1);
+        psm2.setString(3,dipendente.getNome());
+        psm2.setString(4,dipendente.getCognome());
+        psm2.setString(5,dipendente.getIndirizzo());
+        psm2.setString(6,dipendente.getMail());
+        psm2.setString(7,dipendente.getPassword());
+        psm2.setInt(8,dipendente.getIdFarmacia());
+        psm2.executeUpdate();
+    }
+
 
 
 }

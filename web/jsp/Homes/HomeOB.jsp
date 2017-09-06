@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: paolo
   Date: 06/09/17
-  Time: 10.01
+  Time: 18.12
   To change this template use File | Settings | File Templates.
 --%>
 <!DOCTYPE html>
@@ -31,10 +31,6 @@
 <ul id="HomeList" style="margin:auto; display: table; margin-top: 100pt; list-style-type: none;" >
     <li><a class="active" href="sito.html" style="color: black;">Home</a></li>
     <li><a class="active" href="comeAccedere.html" style="color: black;">Vendite</a></li>
-    <li><a class="active" href="/jsp/InserimentoDipendente.jsp" style="color: black;">Registrazione Personale</a></li>
-    <br>
-    <li><a class="active" href="" style="color: black;">Acquisto prodotti</a></li>
-    <li><a class="active" href="" style="color: black;">Magazzino</a></li>
 </ul>
 
 

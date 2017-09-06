@@ -17,7 +17,7 @@
 <body vlink="white">
 
 <div>
-    <ul>
+    <ul id="UL">
         <li><a class="active" href="sito.html">Home</a></li>
         <li><a class="active" href="comeAccedere.html">Come accedere</a>
         <li><a class="active" href="sito.html">Informazioni</a></li>
@@ -34,16 +34,17 @@
 </h1>
 
 <div>
+    <jsp:useBean id="Login" scope="session" class="Beans.Login"/>
     <form action="/Login.do" style="margin: auto; display: block; margin-left: 400pt; margin-top: 100pt">
         First name:<br>
-        <input type="text" name="firstname" style="border-radius: 10px; width: 30%;"><br>
+        <input type="text" name="CFTitolare" style="border-radius: 10px; width: 30%;"><br>
         Last name:<br>
-        <input type="text" name="lastname" style="border-radius: 10px; width: 30%;"><br>
+        <input type="password" name="Password" style="border-radius: 10px; width: 30%;"><br>
         <input type="submit" value="LOGIN" style = "margin-top: 15px">
     </form>
 </div>
 
-<div id="fine" style="margin-top: 140pt">
+<div id="fine" style="margin-top: 138pt">
     Applicazione web creata da: Paolo Mazza (20010255@studenti.uniupo.it)
 </div>
 </body>

@@ -22,12 +22,12 @@
             {
                 message = (String) request.getAttribute("exitCode");
                 if (message == null)
-                    message = "Login non effettuata";
+                    message = "LoginAction non effettuata";
             }
         }
         catch(Exception e)
         {
-            message = "Login non effettuata";
+            message = "LoginAction non effettuata";
         }
     %>
 <h1><h1><%= message%></h1></h1>
