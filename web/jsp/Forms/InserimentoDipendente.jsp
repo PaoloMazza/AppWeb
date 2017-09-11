@@ -62,8 +62,8 @@
         </div>
         <br><br>
         <div>
-            <input type="radio" name="Tipo" value="OB" checked="checked"/>OP
-            <input type="radio" name="Tippo" value="DF"/>DF
+            <input type="radio" name="Tipo" value="OB" />OP
+            <input type="radio" name="Tipo" value="DF"/>DF
         </div>
         <br><br><br>
         <div class="button">

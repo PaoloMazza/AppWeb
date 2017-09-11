@@ -29,12 +29,11 @@
 
 
 <ul id="HomeList" style="margin:auto; display: table; margin-top: 100pt; list-style-type: none;" >
-    <li><a class="active" href="sito.html" style="color: black;">Home</a></li>
+    <li><a class="active" href="sito.html" style="color: black;">Messaggistica</a></li>
     <li><a class="active" href="comeAccedere.html" style="color: black;">Vendite</a></li>
     <li><a class="active" href="/jsp/Forms/InserimentoDipendente.jsp" style="color: black;">Registrazione Personale</a></li>
     <br>
-    <li><a class="active" href="" style="color: black;">Acquisto prodotti</a></li>
-    <li><a class="active" href="" style="color: black;">Magazzino</a></li>
+    <li><a class="active" href="/jsp/Funtions/Warehouse.jsp" style="color: black;">Gestione magazzino</a></li>
 </ul>
 
 

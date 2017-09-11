@@ -14,17 +14,24 @@
 
     <action-mappings>
         <action path="/enter" name="CreazioneFarmacia" type="Actions.AggiuntaFarmacia">
-            <forward name="SUCCESS" path="/jsp/greetings.jsp" />
-            <forward name="ERROR" path="/jsp/greetings.jsp" />
+            <forward name="SUCCESS" path="/jsp/Results/greetings.jsp" />
+            <forward name="ERROR" path="/jsp/Results/greetings.jsp" />
         </action>
         <action path="/Login" name="Login" type="Actions.LoginAction">
-            <forward name="SUCCESS" path="/jsp/HomeTitolare.jsp"/>
-            <forward name="ERROR" path="/jsp/Bad%20Login.html" />
+            <forward name="TITOLARE" path="/jsp/Homes/HomeTitolare.jsp"/>
+            <forward name="OB" path="/jsp/Homes/HomeOB.jsp"/>
+            <forward name="DF" path="/jsp/Homes/HomeDF.jsp" />
+            <forward name="ERROR" path="/jsp/Results/Bad%20Login.html" />
         </action>
 
         <action path="/inserimentoDipendente" name="InserimentoDipendente" type="Actions.AggiuntaDipendente">
-            <forward name="SUCCESS" path="/jsp/greetings.jsp" />
-            <forward name="ERROR" path="/jsp/greetings.jsp" />
+            <forward name="SUCCESS" path="/jsp/Results/greetings.jsp" />
+            <forward name="ERROR" path="/jsp/Results/greetings.jsp" />
         </action>
+
+        <action path="/AggiuntaOrdine" type="Actions.AggiuntaAlMagazzino">
+            <forward name="SUCCESS" path="/jsp/Results/greetings.jsp" />
+        </action>
+
     </action-mappings>
 </struts-config>

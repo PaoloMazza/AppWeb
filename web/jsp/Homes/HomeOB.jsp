@@ -29,7 +29,7 @@
 
 
 <ul id="HomeList" style="margin:auto; display: table; margin-top: 100pt; list-style-type: none;" >
-    <li><a class="active" href="sito.html" style="color: black;">Home</a></li>
+    <li><a class="active" href="sito.html" style="color: black;">Messaggistica</a></li>
     <li><a class="active" href="comeAccedere.html" style="color: black;">Vendite</a></li>
 </ul>
 

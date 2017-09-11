@@ -37,7 +37,17 @@ public class LoginAction extends Action {
         }
 
         request.setAttribute("confirm","Login Eseguito correttamente");
-        return (mapping.findForward("SUCCESS"));
+        switch (login.getTipo()){
+
+            case 1: //TITOLARE
+                return (mapping.findForward("TITOLARE"));
+            case 2: //Dottore Farmacista
+                return (mapping.findForward("DF"));
+            case 3: //Operatore di banco
+                return (mapping.findForward("OB"));
+        }
+
+        return null;
 
 
     }

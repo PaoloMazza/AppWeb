@@ -132,3 +132,18 @@ prova{
 #smarrimento{
     margin-bottom: 100px;
 }
+
+table{
+    border-collapse: collapse;
+    width: 100%
+}
+table, tr {
+    border: 1px solid firebrick;
+    border-bottom: 1px solid black;
+}
+th, td {
+    text-align: center;
+    padding: 5px;
+
+}
+tr:nth-child(even){background-color: #f2f2f2}

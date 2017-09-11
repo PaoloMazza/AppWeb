@@ -12,8 +12,19 @@
     <title>Farmacia inserita</title>
 </head>
 <body>
+<jsp:useBean id="login" scope="session" class="Beans.Login"/>
 
+<%
+    String redirect = new String();
+    if(login.getTipo() == 1)
+        redirect = "4;/jsp/Homes/HomeTitolare.jsp";
+    else if(login.getTipo() == 2)
+        redirect= "4;/jsp/Homes/HomeDF.jsp";
+    else if (login.getTipo() == 3)
+        redirect= "4;/jsp/Homes/HomeOB.jsp";
+%>
 
+<meta http-equiv="refresh" content= "<%=redirect%>" />
     <% String message = null;
         try
         {
@@ -30,6 +41,6 @@
             message = "LoginAction non effettuata";
         }
     %>
-<h1><h1><%= message%></h1></h1>
+<h1><h1 style="margin: auto; margin-top: 100px"><%= message%></h1></h1>
 </body>
 </html>

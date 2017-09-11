@@ -4,6 +4,10 @@ import Beans.Dipendente;
 import Beans.Farmacia;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 
 public class Database {
 
@@ -138,7 +142,7 @@ public class Database {
         String titolare = "INSERT INTO Dipendente Values (?,?,?,?,?,?,?,?)";
         PreparedStatement psm2  = conn.prepareStatement(titolare);
         psm2.setString(1,dipendente.getCF());
-        psm2.setInt(2, 1);
+        psm2.setInt(2, dipendente.getTipo());
         psm2.setString(3,dipendente.getNome());
         psm2.setString(4,dipendente.getCognome());
         psm2.setString(5,dipendente.getIndirizzo());
@@ -147,6 +151,133 @@ public class Database {
         psm2.setInt(8,dipendente.getIdFarmacia());
         psm2.executeUpdate();
     }
+
+    //FUNZIONI PER IL MAGAZZINO
+
+
+    public String fillWarehouseTable(int id){
+        String out = "";
+        String query = "SELECT DISTINCT * FROM Magazzino INNER JOIN Prodotto ON Magazzino.CodiceProdotto = Prodotto.idProdotto WHERE IdFarmacia = ?";
+        try {
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setInt(1, id);
+            System.out.println(statement.toString());
+            ResultSet resultSet = statement.executeQuery();
+            int x = 1;
+            while (resultSet.next()) {
+                out = out.concat("<tr><td><p name=\"id"+x+"\" >" + resultSet.getInt("CodiceProdotto") + "</p></td><td><p>" + resultSet.getString("NomeProdotto") + "</p></td><td><p>" + resultSet.getString("Prezzo") + " &#8364</p></td><td><p>" + resultSet.getString("QuantitaProdotto") + "</p></td><td><p><input type=\"number\" value=0 name=\"ordina" + x + "\" size=\"3\" id=\"ordina" + x + "\" class=\"ordina\"></td></tr>");
+                x++;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return out;
+    }
+
+    public void insertOrder(HashMap<Integer,Integer> hashMap, int id) throws SQLException {
+
+        String insert = "";
+        double finalPrice = 0;
+
+        for(int i = 1; i< NumeroProdotti()+1; i++){
+            if(hashMap.containsKey(i)){
+                double price = getProductPrice(i);
+                String name = getProductname(i);
+                price *= hashMap.get(i);
+                finalPrice += price;
+                System.out.println("chiave =" +hashMap.get(i)+ " idFarmacia=" +id+" Prodotto= " +i);
+                incrementProductQuantity(hashMap.get(i),id,i);
+                if(i == 1)
+                    insert = insert + name+ " * "  + hashMap.get(i);
+                else
+                    insert = insert + "," + name+ " * "  + hashMap.get(i);
+            }
+        }
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        java.util.Date date = new Date();
+
+        String query = "INSERT INTO Ordine Values (?,?,?,?)";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setString(1,dateFormat.format(date));
+        statement.setDouble(2,finalPrice);
+        statement.setString(3,insert);
+        statement.setInt(4,id);
+        statement.executeUpdate();
+    }
+
+
+    private void incrementProductQuantity(int sum, int FarmacyId, int prodotto) throws SQLException {
+        String query = "UPDATE Magazzino SET QuantitaProdotto = QuantitaProdotto + ? WHERE IdFarmacia = ? AND CodiceProdotto = ?";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setInt(1,sum);
+        statement.setInt(2,FarmacyId);
+        statement.setString(3,String.valueOf(prodotto));
+        System.out.println(statement.toString());
+        statement.executeUpdate();
+    }
+
+//FUNZIONI PER IL PRODOTTO
+
+    public int NumeroProdotti(){
+        int quantity = 0;
+        String query = "SELECT DISTINCT * FROM Prodotto";
+        try {
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next())
+                quantity++;
+
+            return quantity;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    private double getProductPrice(int id){
+        double price = 0;
+        String query = "SELECT DISTINCT Prezzo FROM Prodotto WHERE idProdotto = ?";
+        try {
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.next())
+            return Double.parseDouble(resultSet.getString("Prezzo"));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    private String getProductname(int id){
+        double price = 0;
+        String query = "SELECT DISTINCT NomeProdotto FROM Prodotto WHERE idProdotto = ?";
+        try {
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next())
+                return resultSet.getString("NomeProdotto");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
+
+
 
 
 
