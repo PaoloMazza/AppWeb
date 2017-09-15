@@ -37,5 +37,10 @@
             <forward name="DONE" path="/jsp/Results/ConfirmSale.jsp" />
         </action>
 
+        <action path="/AggiuntaFattura" type="Actions.ConfermaOrdine">
+            <forward name="RECEIPT" path="/jsp/Results/greetings.jsp" />
+            <forward name="ORDINE CONFERMATO" path="/jsp/Results/greetings.jsp" />
+        </action>
+
     </action-mappings>
 </struts-config>

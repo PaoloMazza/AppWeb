@@ -34,7 +34,7 @@
 </h1>
 
 
-<form action="/AggiuntaOrdine.do" method="post" style="width:800px; margin:0 auto;align-content: center;margin-top: 100px">
+<form action="/AggiuntaFattura.do" method="post" style="width:800px; margin:0 auto;align-content: center;margin-top: 100px">
     <div style="overflow-x:auto;">
         <table id="lm">
             <thead>

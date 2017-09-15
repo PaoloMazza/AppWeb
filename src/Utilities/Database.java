@@ -193,9 +193,15 @@ public class Database {
             statement.setInt(1, id);
             System.out.println(statement.toString());
             ResultSet resultSet = statement.executeQuery();
+            String ricetta1 = "";
             int x = 1;
             while (resultSet.next()) {
-                out = out.concat("<tr><td><p name=\"id"+x+"\" >" + resultSet.getInt("CodiceProdotto") + "</p></td><td><p>" + resultSet.getString("NomeProdotto") + "</p></td><td><p>" + resultSet.getDouble("Prezzo") + " &#8364</p></td><td><p>" + resultSet.getInt("QuantitaProdotto") + "</p></td><td><p><input type=\"number\" value=0 min=\"0\" name=\"ordina" + x + "\" size=\"3\" id=\"ordina" + x + "\" class=\"ordina\"></td></tr>");
+                if(productNeedsReceipt(resultSet.getInt("CodiceProdotto")))
+                    ricetta1 = "SI";
+                else
+                    ricetta1 = "NO";
+
+                out = out.concat("<tr><td><p name=\"id"+x+"\" >" + resultSet.getInt("CodiceProdotto") + "</p></td><td><p>" + resultSet.getString("NomeProdotto") + "</p></td><td><p>" + resultSet.getDouble("Prezzo") + " &#8364</p></td><td><p>" + resultSet.getInt("QuantitaProdotto") + "</p></td><td>"+ricetta1+"<p></p></td><td><p><input type=\"number\" value=0 min=0 max="+resultSet.getInt("QuantitaProdotto") +" name=\"ordina" + x + "\" size=\"3\" id=\"ordina" + x + "\" class=\"ordina\"></td></tr>");
                 x++;
             }
 
@@ -244,6 +250,45 @@ public class Database {
     }
 
 
+    public void insertInvoice(HashMap<Integer,Integer> prodotti, int id, String ricetta) throws SQLException {
+
+        String insert = "";
+        double finalPrice = 0;
+        int counter = 0;
+
+        Integer ids[] = prodotti.keySet().toArray(new Integer[prodotti.size()]);
+
+        for(int i = 0; i< ids.length;i++){
+            double price = getProductPrice(ids[i]);
+            String name = getProductname(ids[i]);
+            price *= prodotti.get(ids[i]);
+            finalPrice += price;
+            DecrementProductQuantity(prodotti.get(ids[i]),id,ids[i]);
+            if(counter ==0)
+                insert = insert + name+ " * "  + prodotti.get(ids[i]);
+            else
+                insert = insert + "," + name+ " * "  + prodotti.get(ids[i]);
+
+            counter++;
+        }
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        java.util.Date date = new Date();
+
+        String query = "INSERT INTO Fattura(IdFarmacia,Data,Prezzo,Ricetta,Articoli) Values (?,?,?,?,?)";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setInt(1,id);
+        statement.setString(2,dateFormat.format(date));
+        statement.setDouble(3,finalPrice);
+        statement.setString(4,ricetta);
+        statement.setString(5,insert);
+        statement.executeUpdate();
+    }
+
+
+
+
+
     private void incrementProductQuantity(int sum, int FarmacyId, int prodotto) throws SQLException {
         String query;
         PreparedStatement statement;
@@ -257,6 +302,30 @@ public class Database {
         }
         else {
             query = "UPDATE Magazzino SET QuantitaProdotto = QuantitaProdotto + ? WHERE IdFarmacia = ? AND CodiceProdotto = ?";
+            statement = conn.prepareStatement(query);
+            statement.setInt(1, sum);
+            statement.setInt(2, FarmacyId);
+            statement.setString(3, String.valueOf(prodotto));
+            statement.executeUpdate();
+        }
+
+    }
+
+
+
+    private void DecrementProductQuantity(int sum, int FarmacyId, int prodotto) throws SQLException {
+        String query;
+        PreparedStatement statement;
+        if(getProductQuantity(prodotto,FarmacyId) == 0) {
+            query = "INSERT INTO Magazzino VALUES (?,?,?)";
+            statement = conn.prepareStatement(query);
+            statement.setInt(1,FarmacyId);
+            statement.setInt(2,prodotto);
+            statement.setInt(3,sum);
+            statement.executeUpdate();
+        }
+        else {
+            query = "UPDATE Magazzino SET QuantitaProdotto = QuantitaProdotto - ? WHERE IdFarmacia = ? AND CodiceProdotto = ?";
             statement = conn.prepareStatement(query);
             statement.setInt(1, sum);
             statement.setInt(2, FarmacyId);
@@ -366,6 +435,20 @@ public class Database {
         return 0;
     }
 
+    private boolean productNeedsReceipt(int id) throws SQLException {
+        String query = "SELECT Ricetta FROM Prodotto WHERE idProdotto = ?";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+
+        resultSet.next();
+
+        if(resultSet.getBoolean("Ricetta") == true)
+            return true;
+        else
+            return false;
+
+    }
 
 
     //FUNZIONE PER VENDITA
@@ -375,15 +458,23 @@ public class Database {
         Integer keys[] = products.keySet().toArray(new Integer[products.size()]);
         Integer quantities[] = products.values().toArray(new Integer[products.size()]);
 
-
         for(int i = 0; i< keys.length;i++) {
             String productName = getProductname(keys[i]);
             Double price = getProductPrice(keys[i]);
             out = out.concat("<tr><td><p name=\"id" + keys[i] + "\" >" + keys[i] + "</p></td><td><p>" + productName + "</p></td><td><p>" + price + " &#8364</p></td><td><p>" + quantities[i] + "</p></td></tr>");
         }
-
         return out;
+    }
 
+
+    public boolean InvoiceNeedsPrescription(Integer[] keys) throws SQLException {
+        boolean ThereIsAReceipt = false;
+        for(int i = 0; i< keys.length;i++){
+            if(productNeedsReceipt(keys[i]))
+                ThereIsAReceipt = true;
+        }
+
+        return ThereIsAReceipt;
     }
 
 }
