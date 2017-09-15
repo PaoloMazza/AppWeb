@@ -33,5 +33,9 @@
             <forward name="SUCCESS" path="/jsp/Results/greetings.jsp" />
         </action>
 
+        <action path="/VenditaProdotti" type="Actions.VenditaProdotti">
+            <forward name="DONE" path="/jsp/Results/ConfirmSale.jsp" />
+        </action>
+
     </action-mappings>
 </struts-config>

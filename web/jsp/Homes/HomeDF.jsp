@@ -33,6 +33,8 @@
     <li><a class="active" href="comeAccedere.html" style="color: black;">Vendite</a></li>
     <br>
     <li><a class="active" href="" style="color: black;">Inserimento pazienti</a></li>
+    <br>
+    <li><a class="active" href="/jsp/Funtions/Sales.jsp" style="color: black;">Vendita Prodotti</a></li>
 </ul>
 
 

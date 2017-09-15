@@ -34,6 +34,8 @@
     <li><a class="active" href="/jsp/Forms/InserimentoDipendente.jsp" style="color: black;">Registrazione Personale</a></li>
     <br>
     <li><a class="active" href="/jsp/Funtions/Warehouse.jsp" style="color: black;">Gestione magazzino</a></li>
+    <br>
+    <li><a class="active" href="/jsp/Funtions/Sales.jsp" style="color: black;">Vendita Prodotti</a></li>
 </ul>
 
 

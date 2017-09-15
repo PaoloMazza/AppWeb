@@ -1,8 +1,8 @@
 <%@ page import="Utilities.Database" %><%--
   Created by IntelliJ IDEA.
   User: paolo
-  Date: 07/09/17
-  Time: 16.21
+  Date: 13/09/17
+  Time: 18.24
   To change this template use File | Settings | File Templates.
 --%>
 <!DOCTYPE html>
@@ -16,6 +16,7 @@
 
 <body vlink="white">
 <jsp:useBean id="login" scope="session" class="Beans.Login"/>
+<jsp:useBean id="vendita" scope="session" class="Beans.Vendita"/>
 <div>
     <ul id="UL">
         <li><a class="active" href="/jsp/Homes/HomeTitolare.jsp">Home</a></li>
@@ -29,25 +30,24 @@
 
 
 <h1 id="titolo">
-   Gestione magazzino
+    Vuoi confermare la seguente fattura?
 </h1>
 
 
 <form action="/AggiuntaOrdine.do" method="post" style="width:800px; margin:0 auto;align-content: center;margin-top: 100px">
-<div style="overflow-x:auto;">
-    <table id="lm">
+    <div style="overflow-x:auto;">
+        <table id="lm">
             <thead>
-                <tr>
-                    <th>Codice Prodottto</th>
-                    <th>Nome prodotto</th>
-                    <th>Prezzo</th>
-                    <th>Quantit&#224;</th>
-                    <th>Inserire unit&#224; da aggiungere al magazzino</th>
-                </tr>
+            <tr>
+                <th>Codice Prodottto</th>
+                <th>Nome prodotto</th>
+                <th>Prezzo</th>
+                <th>Quantit&#224;</th>
+            </tr>
             </thead>
             <tbody>
-                <% Database listamagazzino = Database.getInstance();%>
-                <%=listamagazzino.fillWarehouseTable(login.getIdFarmacia())%>
+            <% Database listamagazzino = Database.getInstance();%>
+            <%=listamagazzino.Invoice(vendita.getProdotti())%>
             </tbody>
         </table>
         <br><br>
@@ -63,4 +63,3 @@
 
 
 </html>
-
