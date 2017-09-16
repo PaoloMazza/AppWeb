@@ -2,6 +2,8 @@ package Utilities;
 
 import Beans.Dipendente;
 import Beans.Farmacia;
+import Beans.Medico;
+import Beans.Paziente;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.*;
@@ -17,6 +19,7 @@ public class Database {
     private static Database database = new Database();
     private Connection conn;
 
+    //METODI PER IL FUNZIONAMENTO DEL DATABASE
     private Database(){
 
         try {
@@ -51,6 +54,7 @@ public class Database {
         return resultSet;
     }
 
+    //FUNZIONI PER LA FARMACIA
 
     public int getFarmaciaId(String CFtitolare) throws SQLException {
 
@@ -131,6 +135,48 @@ public class Database {
         return preparedStatement.executeQuery();
     }
 
+
+    //FUNZIONE PER L'INSERIMENTO DI UN PAZIENTE
+
+    public boolean PatientExists(String cf) throws SQLException {
+        String query = "SELECT DISTINCT * FROM Paziente WHERE CodiceFiscale = ?";
+        PreparedStatement psm = conn.prepareStatement(query);
+        psm.setString(1, cf);
+        return psm.executeQuery().isBeforeFirst();
+    }
+
+    public void InserimentoPaziente(Paziente paziente, String cf, int id) throws SQLException {
+        String titolare = "INSERT INTO Paziente Values (?,?,?,?,?,?)";
+        PreparedStatement psm2  = conn.prepareStatement(titolare);
+        psm2.setString(1,paziente.getCodiceFiscale());
+        psm2.setString(2,paziente.getNome());
+        psm2.setString(3,paziente.getCognome());
+        psm2.setString(4,paziente.getDatadiNascita());
+        psm2.setString(5, cf);
+        psm2.setInt(6,id);
+        psm2.executeUpdate();
+    }
+
+    //FUNZIONE PER L'INSERIMENTO DI UN MEDICO
+
+    public boolean MedicExists(int codiceRegionale) throws SQLException {
+        String query = "SELECT DISTINCT * FROM Medico WHERE CodiceRegionale = ?";
+        PreparedStatement psm = conn.prepareStatement(query);
+        psm.setInt(1, codiceRegionale);
+        return psm.executeQuery().isBeforeFirst();
+    }
+
+    public void InserimentoMedico(Medico medico) throws SQLException {
+        String titolare = "INSERT INTO Medico Values (?,?,?,?,?)";
+        PreparedStatement psm2  = conn.prepareStatement(titolare);
+        psm2.setInt(1,medico.getCodiceRegionale());
+        psm2.setString(2,medico.getCF());
+        psm2.setString(3,medico.getNome());
+        psm2.setString(4,medico.getCognome());
+        psm2.setString(5, medico.getIndirizzo());
+        psm2.executeUpdate();
+    }
+
     //METODI PER L'INSERIMENTO DELL'UTENTE
 
     public boolean UserExists(String CF) throws SQLException {
@@ -155,8 +201,7 @@ public class Database {
         psm2.executeUpdate();
     }
 
-    //FUNZIONI PER IL MAGAZZINO
-
+    //FUNZIONI PER LE TABELLE DI VENDITA/ACQUISTO
 
     public String fillWarehouseTable(int id){
         String out = "";
@@ -212,7 +257,7 @@ public class Database {
         return out;
     }
 
-
+//FUNZIONI PER ORDINI/FATTURE
 
     public void insertOrder(HashMap<Integer,Integer> hashMap, int id) throws SQLException {
 
@@ -286,7 +331,7 @@ public class Database {
     }
 
 
-
+//METODI PER IL MAGAZZINO
 
 
     private void incrementProductQuantity(int sum, int FarmacyId, int prodotto) throws SQLException {
@@ -310,7 +355,6 @@ public class Database {
         }
 
     }
-
 
 
     private void DecrementProductQuantity(int sum, int FarmacyId, int prodotto) throws SQLException {
@@ -476,5 +520,18 @@ public class Database {
 
         return ThereIsAReceipt;
     }
+
+    //FUNZIONE PER REGISTRARE LA RICETTA
+
+    public void insertReceipt(Integer CodiceRicetta, Integer CodiceMedico, String CodicePaziente, String data) throws SQLException {
+        String titolare = "INSERT INTO Ricetta Values (?,?,?,?)";
+        PreparedStatement psm2  = conn.prepareStatement(titolare);
+        psm2.setInt(1,CodiceRicetta);
+        psm2.setInt(2, CodiceMedico);
+        psm2.setString(3,CodicePaziente);
+        psm2.setString(4,data);;
+        psm2.executeUpdate();
+    }
+
 
 }

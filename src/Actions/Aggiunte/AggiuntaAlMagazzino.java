@@ -1,4 +1,4 @@
-package Actions;
+package Actions.Aggiunte;
 
 import Beans.Login;
 import Utilities.Database;

@@ -13,7 +13,7 @@
     </form-beans>
 
     <action-mappings>
-        <action path="/enter" name="CreazioneFarmacia" type="Actions.AggiuntaFarmacia">
+        <action path="/enter" name="CreazioneFarmacia" type="Actions.Aggiunte.AggiuntaFarmacia">
             <forward name="SUCCESS" path="/jsp/Results/greetings.jsp" />
             <forward name="ERROR" path="/jsp/Results/greetings.jsp" />
         </action>
@@ -24,12 +24,12 @@
             <forward name="ERROR" path="/jsp/Results/Bad%20Login.html" />
         </action>
 
-        <action path="/inserimentoDipendente" name="InserimentoDipendente" type="Actions.AggiuntaDipendente">
+        <action path="/inserimentoDipendente" name="InserimentoDipendente" type="Actions.Aggiunte.AggiuntaDipendente">
             <forward name="SUCCESS" path="/jsp/Results/greetings.jsp" />
             <forward name="ERROR" path="/jsp/Results/greetings.jsp" />
         </action>
 
-        <action path="/AggiuntaOrdine" type="Actions.AggiuntaAlMagazzino">
+        <action path="/AggiuntaOrdine" type="Actions.Aggiunte.AggiuntaAlMagazzino">
             <forward name="SUCCESS" path="/jsp/Results/greetings.jsp" />
         </action>
 
@@ -38,9 +38,30 @@
         </action>
 
         <action path="/AggiuntaFattura" type="Actions.ConfermaOrdine">
-            <forward name="RECEIPT" path="/jsp/Results/greetings.jsp" />
+            <forward name="RECEIPT" path="/jsp/Results/Sale_error.jsp" />
             <forward name="ORDINE CONFERMATO" path="/jsp/Results/greetings.jsp" />
         </action>
+
+        <action path="/InserimentoRicetta" type="Actions.Aggiunte.AggiuntaRicetta">
+            <forward name="ERROR" path="/jsp/Results/Sale_error.jsp" />
+            <forward name="SUCCESS" path="/jsp/Results/greetings.jsp" />
+        </action>
+
+        <action path="/InserimentoPaziente" type="Actions.Aggiunte.AggiuntaPaziente">
+            <forward name="ERROR" path="/jsp/Results/Sale_error.jsp" />
+            <forward name="SUCCESS" path="/jsp/Results/Sale_error.jsp"/>
+        </action>
+
+        <action path="/InserimentoMedico" type="Actions.Aggiunte.AggiuntaMedico">
+            <forward name="ERROR" path="/jsp/Results/Sale_error.jsp" />
+            <forward name="SUCCESS" path="/jsp/Results/Sale_error.jsp"/>
+        </action>
+
+        <action path="/InserimentoMedicoePaziente" type="Actions.Aggiunte.Aggiunta_Paziente_Medico">
+            <forward name="ERROR" path="/jsp/Results/Sale_error.jsp" />
+            <forward name="SUCCESS" path="/jsp/Results/Sale_error.jsp"/>
+        </action>
+
 
     </action-mappings>
 </struts-config>

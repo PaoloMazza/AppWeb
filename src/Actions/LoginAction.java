@@ -27,7 +27,8 @@ public class LoginAction extends Action {
         }else {
             utente.next();
             HttpSession session = request.getSession();
-            login.setCodiceFiscale(request.getParameter("CFtitolare"));
+            login.setCodiceFiscale(request.getParameter("CFTitolare"));
+            System.out.println(login.getCodiceFiscale());
             login.setPassword(request.getParameter("Password"));
             login.setNome(utente.getString("Nome"));
             login.setCognome(utente.getString("Cognome"));
