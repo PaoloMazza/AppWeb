@@ -31,7 +31,7 @@
 <h1 id="titolo">Account regione</h1>
 
 <ul id="HomeList" style="margin:auto; display: table; margin-top: 50pt; list-style-type: none;" >
-    <li><a class="active" href="sito.html" style="color: black;">Statistiche regionali</a></li>
+    <li><a class="active" href="/jsp/Forms/messages/MessagesPage.jsp" style="color: black;">Statistiche regionali</a></li>
     <li><a class="active" href="/jsp/Forms/Inserimenti/Inserimento_farmacia.jsp" style="color: black;">Registrazione nuova farmacia</a></li>
 </ul>
 

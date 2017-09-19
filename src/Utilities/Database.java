@@ -187,7 +187,6 @@ public class Database {
         return psm.executeQuery().isBeforeFirst();
     }
 
-
     public void insertUser(Dipendente dipendente) throws SQLException {
         String titolare = "INSERT INTO Dipendente Values (?,?,?,?,?,?,?,?)";
         PreparedStatement psm2  = conn.prepareStatement(titolare);
@@ -552,5 +551,130 @@ public class Database {
         return resultSet.isBeforeFirst();
     }
 
+    //METODI PER I MESSAGGI
+
+    public String fillTableMessages(String CF){
+        String query = "SELECT * FROM Messaggio WHERE destinatario = ? ORDER BY data DESC ";
+        String result = "";
+        try {
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1,CF);
+            ResultSet resultSet = statement.executeQuery();
+
+          if(resultSet.isBeforeFirst()){
+              resultSet.next();
+               while (!resultSet.isAfterLast()) {
+                int id = resultSet.getInt("idMessaggio");
+                String mittente = getNameSurname(resultSet.getString("mittente"));
+                String oggetto = resultSet.getString("oggetto");
+                String data = resultSet.getString("data");
+                result += "<form action=\"/LeggiMail.do\" method=\"post\"><tr><td><p name =id>" + id + "</p></td><td><p>" + mittente + "</p></td><td><p>" + oggetto + "</p></td><td><p>" + data + "</p></td><td> <button type=\"submit\">Rispondere</button></td>";
+                resultSet.next();
+            }
+        }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public String fillTableContacts(String CF, int code) throws Exception{
+        String query = "";
+        int pharmacyId = getEmployeePharmacyId(CF);
+        PreparedStatement statement = null;
+        String result = "";
+
+        switch (code){
+
+            case 1:
+                query = "SELECT * FROM Dipendente WHERE IdFarmacia = ? OR  IdFarmacia = 0 ORDER BY IdFarmacia DESC";
+                statement = conn.prepareStatement(query);
+                statement.setInt(1,pharmacyId);
+                break;
+            case 0:
+                query = "SELECT * FROM Dipendente WHERE TipoDipendente = 1 ORDER BY IdFarmacia DESC";
+                statement = conn.prepareStatement(query);
+                break;
+
+            default:
+                query = "SELECT * FROM Dipendente WHERE IdFarmacia = ? ORDER BY IdFarmacia DESC";
+                statement = conn.prepareStatement(query);
+                statement.setInt(1,pharmacyId);
+                break;
+        }
+
+        ResultSet resultSet = statement.executeQuery();
+
+        if(resultSet.isBeforeFirst()){
+            resultSet.next();
+            while (!resultSet.isAfterLast()) {
+                String name = resultSet.getString("Nome");
+                String surname = getNameSurname(resultSet.getString("Cognome"));
+                int farmacia = resultSet.getInt("IdFarmacia");
+                String cf = resultSet.getString("CFdipendente");
+                result += "<form action=\"/LeggiMail.do\" method=\"post\"><tr><td><p>" + name + "</p></td><td><p>" + surname + "</p></td><td><p>" + farmacia + "</p></td><td><p>" + cf + "</p></td></tr>";
+                resultSet.next();
+            }
+        }
+
+        return result;
+
+    }
+
+    public void sendMessage(String sender, String[] receiver, String object, String message) throws Exception{
+
+        for(int i = 0; i < receiver.length;i++){
+            String query = "INSERT INTO Messaggio (mittente, destinatario, oggetto, messaggio, data) Values (?,?,?,?,?)";
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1, sender);
+            statement.setString(2, receiver[i]);
+            statement.setString(3, object);
+            statement.setString(4,message);
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            java.util.Date date = new Date();
+            statement.setString(5,dateFormat.format(date));
+
+
+            statement.executeUpdate();
+
+        }
+
+    }
+
+    //METODI PER I DIPENDENTI
+
+    public int getEmployeePharmacyId(String cf){
+        String query = "SELECT IdFarmacia FROM Dipendente WHERE CFdipendente = ? ";
+        try {
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1,cf);
+            ResultSet set = statement.executeQuery();
+            set.next();
+            System.out.println(set.getInt("IdFarmacia"));
+            return set.getInt("IdFarmacia");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+
+    public String getNameSurname(String cf){
+        String query = "SELECT * FROM Dipendente WHERE CFdipendente = ? ";
+        try {
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1,cf);
+            ResultSet set = statement.executeQuery();
+            set.next();
+            String res = set.getString("Nome") + " " + set.getString("Cognome");
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
 }

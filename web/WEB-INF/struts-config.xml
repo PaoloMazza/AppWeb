@@ -67,5 +67,10 @@
             <forward name="SUCCESS" path="/jsp/Forms/Log/Login.jsp" />
         </action>
 
+        <action path="/InviareMessaggio" type="Actions.Messaggi.inviaMessaggioDipendente">
+            <forward name="ERROR" path="/jsp/Results/MailError.jsp"/>
+            <forward name="SUCCESS" path="/jsp/Results/greetings.jsp" />
+        </action>
+
     </action-mappings>
 </struts-config>
