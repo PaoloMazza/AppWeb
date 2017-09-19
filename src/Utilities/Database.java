@@ -225,14 +225,14 @@ public class Database {
     }
 
 
-    public String FillSalesTable(int id, boolean ricetta){
+    public String FillSalesTable(int id, boolean NOricetta){
         String out = "";
         String query = "";
 
-        if(!ricetta)
+        if(!NOricetta)
           query = "SELECT DISTINCT * FROM Magazzino INNER JOIN Prodotto ON Magazzino.CodiceProdotto = Prodotto.idProdotto WHERE IdFarmacia = ?";
         else
-          query = "SELECT DISTINCT * FROM Magazzino INNER JOIN Prodotto ON Magazzino.CodiceProdotto = Prodotto.idProdotto WHERE IdFarmacia = ? AND Prodotto.Ricetta = 1";
+          query = "SELECT DISTINCT * FROM Magazzino INNER JOIN Prodotto ON Magazzino.CodiceProdotto = Prodotto.idProdotto WHERE IdFarmacia = ? AND Prodotto.Ricetta = 0";
 
         try {
             PreparedStatement statement = conn.prepareStatement(query);

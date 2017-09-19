@@ -34,9 +34,9 @@ public class AggiuntaDipendente extends Action {
         String tipo =  request.getParameter("Tipo");
 
         if("OB".equals(tipo))
-            dipendente.setTipo(2);
-        else
             dipendente.setTipo(3);
+        else
+            dipendente.setTipo(2);
 
         if(!database.UserExists(dipendente.getCF())){
             database.insertUser(dipendente);

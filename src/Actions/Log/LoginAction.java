@@ -1,4 +1,4 @@
-package Actions;
+package Actions.Log;
 
 import Beans.Login;
 import Utilities.Database;
@@ -40,12 +40,15 @@ public class LoginAction extends Action {
         request.setAttribute("confirm","Login Eseguito correttamente");
         switch (login.getTipo()){
 
+            case 0:
+                return (mapping.findForward("REGIONE"));
+
             case 1: //TITOLARE
                 return (mapping.findForward("TITOLARE"));
             case 2: //Dottore Farmacista
-                return (mapping.findForward("DF"));
-            case 3: //Operatore di banco
                 return (mapping.findForward("OB"));
+            case 3: //Operatore di banco
+                return (mapping.findForward("DF"));
         }
 
         return null;

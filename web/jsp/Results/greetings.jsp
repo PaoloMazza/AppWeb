@@ -22,6 +22,8 @@
         redirect= "4;/jsp/Homes/HomeDF.jsp";
     else if (login.getTipo() == 3)
         redirect= "4;/jsp/Homes/HomeOB.jsp";
+    else if(login.getTipo() == 0)
+        redirect= "4;/jsp/Homes/HomeRegione.jsp";
 %>
 
 <meta http-equiv="refresh" content= "<%=redirect%>" />

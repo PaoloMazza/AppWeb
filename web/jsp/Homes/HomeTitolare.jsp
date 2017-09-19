@@ -23,6 +23,9 @@
         <div id="form">
             <li><a><%= login.getNome() + " " + login.getCognome()%>
             </a>
+                <form action="/logout.do" method="post" style="text-align: center">
+                    <input type="submit" value="Logout" id="invio" />
+                </form>
         </div>
     </ul>
 </div>
@@ -31,7 +34,7 @@
 <ul id="HomeList" style="margin:auto; display: table; margin-top: 100pt; list-style-type: none;" >
     <li><a class="active" href="sito.html" style="color: black;">Messaggistica</a></li>
     <li><a class="active" href="comeAccedere.html" style="color: black;">Vendite</a></li>
-    <li><a class="active" href="/jsp/Forms/InserimentoDipendente.jsp" style="color: black;">Registrazione Personale</a></li>
+    <li><a class="active" href="/jsp/Forms/Inserimenti/InserimentoDipendente.jsp" style="color: black;">Registrazione Personale</a></li>
     <br>
     <li><a class="active" href="/jsp/Funtions/Warehouse.jsp" style="color: black;">Gestione magazzino</a></li>
     <br>

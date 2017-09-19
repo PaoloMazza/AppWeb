@@ -17,7 +17,8 @@
             <forward name="SUCCESS" path="/jsp/Results/greetings.jsp" />
             <forward name="ERROR" path="/jsp/Results/greetings.jsp" />
         </action>
-        <action path="/Login" name="Login" type="Actions.LoginAction">
+        <action path="/Login" name="Login" type="Actions.Log.LoginAction">
+            <forward name="REGIONE" path="/jsp/Homes/HomeRegione.jsp" />
             <forward name="TITOLARE" path="/jsp/Homes/HomeTitolare.jsp"/>
             <forward name="OB" path="/jsp/Homes/HomeOB.jsp"/>
             <forward name="DF" path="/jsp/Homes/HomeDF.jsp" />
@@ -62,6 +63,9 @@
             <forward name="SUCCESS" path="/jsp/Results/Sale_error.jsp"/>
         </action>
 
+        <action path="/logout" type="Actions.Log.LogoutAction">
+            <forward name="SUCCESS" path="/jsp/Forms/Log/Login.jsp" />
+        </action>
 
     </action-mappings>
 </struts-config>

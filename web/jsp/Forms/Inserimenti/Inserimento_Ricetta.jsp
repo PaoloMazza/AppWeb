@@ -55,7 +55,7 @@
     </div>
     <h4>Nel caso il paziente non esistesse nel database, aggiungerlo tramite la scelta seguente: </h4>
     <ul id="menu" style="display:inline; list-style-type: none;">
-        <li><a class="active" href="/jsp/Forms/Inserimento_paziente.jsp" style="color: black;">Inserire paziente</a></li>
+        <li><a class="active" href="/jsp/Forms/Inserimenti/Inserimento_paziente.jsp" style="color: black;">Inserire paziente</a></li>
 
     </ul>
     <br>

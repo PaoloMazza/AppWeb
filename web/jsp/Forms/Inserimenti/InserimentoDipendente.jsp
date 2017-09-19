@@ -62,7 +62,7 @@
         </div>
         <br><br>
         <div>
-            <input type="radio" name="Tipo" value="OB" />OP
+            <input type="radio" name="Tipo" value="OB" />OB
             <input type="radio" name="Tipo" value="DF"/>DF
         </div>
         <br><br><br>
