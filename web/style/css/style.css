@@ -1,12 +1,15 @@
 body{
-     background: linear-gradient(white, #9bfaff);
+    background: linear-gradient(blue, lightblue);
     background-size: cover;
 }
 
 @font-face {
-    font-family: myFirstFont;
-    src: url(style/fonts/Orbitron/Orbitron-Black.ttf);
+    font-family: 'myFirstFont';
+    src: url(Orbitron-Black.ttf);
+    src: url(Exo-Black.ttf);
+    src: url(SourceSansPro-Black.ttf);
 }
+
 
 #UL {
     list-style-type: none;
@@ -15,6 +18,16 @@ body{
     overflow:hidden;
     background-color:#2860ed;
 }
+
+#HomeList{
+    font-family: Orbitron, sans-serif;
+}
+
+
+#HomeList a:hover{
+    background-color: chartreuse;
+}
+
 
 a {
     float: left;
@@ -50,7 +63,7 @@ input{
     position: relative;
     text-align: center;
     font-size: 60px;
-    font-family: 'Macondo', cursive;
+    font-family: SourceSansPro, sans-serif;
 }
 
 
@@ -131,6 +144,10 @@ prova{
 
 #smarrimento{
     margin-bottom: 100px;
+}
+
+#lm{
+    background: lightskyblue;
 }
 
 table{

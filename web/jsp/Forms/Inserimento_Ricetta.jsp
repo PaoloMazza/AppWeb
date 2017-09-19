@@ -22,7 +22,7 @@
 <div>
     <ul id="UL">
         <li><a class="active" href="/jsp/Homes/HomeTitolare.jsp">Home</a></li>
-        <img src="immagini/1503397977070.jpg" style="width: 4%; margin-left: 5px;padding: 1px;">
+        <img src="/style/images/1503397977070.jpg" style="width: 4%; margin-left: 5px;padding: 1px;">
         <div id="form">
             <li><a><%= login.getNome() + " " + login.getCognome()%>
             </a>
@@ -53,16 +53,14 @@
             <label for="Data">Data di emissione ricetta</label> <input id="Data" name="Data" style="width: 180px;" type="text"> </div>
         <br>
     </div>
-    <h4>Nel caso non fossero disponibili alcuni dei dati, utilizzare una delle seguenti scelte</h4>
+    <h4>Nel caso il paziente non esistesse nel database, aggiungerlo tramite la scelta seguente: </h4>
     <ul id="menu" style="display:inline; list-style-type: none;">
-        <li><a class="active" href="/jsp/Forms/Inserimento_medico.jsp" style="color: black;">Inserire medico</a></li>
         <li><a class="active" href="/jsp/Forms/Inserimento_paziente.jsp" style="color: black;">Inserire paziente</a></li>
-        <li><a class="active" href="/jsp/Forms/Inserimento_medico_paziente.jsp" style="color: black;">Inserire entrambi</a></li>
 
     </ul>
     <br>
     <br>
-    <div class="button" style ="margin-top: 10px; margin: auto"> <button type="submit">Inserire nuova ricetta</button>
+    <div class="button" style ="margin-top: 10px; margin: auto"> <button type="submit">Controllare ricetta</button>
     </div>
 </div>
 </form>

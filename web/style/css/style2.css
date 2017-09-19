@@ -1,0 +1,151 @@
+body{
+     background: linear-gradient(lightblue, lime);
+    background-size: cover;
+}
+
+@font-face {
+    font-family: 'myFirstFont';
+    src: url(Orbitron-Black.ttf);
+    src: url(Exo-Black.ttf);
+    src: url(SourceSansPro-Black.ttf);
+}
+
+#UL {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow:hidden;
+    background-color:#2860ed;
+}
+
+a {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 19px 16px;
+    text-decoration: none;
+}
+
+#UL a:hover {
+    background-color: #111;
+}
+
+#HomeList{
+    font-family: 'myFirstFont', Orbitron-Black,sans-serif;
+}
+
+#HomeList a:hover{
+    background-color: azure;
+}
+
+#form{
+    color: white;
+    float: right;
+    padding: 1px;
+    margin-right: 50px
+}
+
+input{
+    width:100px;
+}
+
+#titolo{
+    color:black;
+    top: 30px;
+    position: relative;
+    text-align: center;
+    font-size: 60px;
+    font-family: 'Nunito', cursive;
+}
+
+
+prova{
+    font-style: normal;
+    color: crimson;
+}
+
+.paragrafi{
+    font-style: italic;
+    text-align: justify;
+    font-family: 'Macondo', sans-serif;
+    font-size: 18px;
+    margin-top: 100px;
+    margin-left:  auto;
+    margin-right: auto;
+    color: black;
+}
+
+#paragrafi2{
+    font-family: Nunito, sans-serif;
+    font-size: 17px;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#fine{
+    background-color: #000000;
+    color: beige;
+    flex: 1;
+    margin-top: 100px;
+    padding: 20px;;
+}
+
+#Siti_utili{
+  padding-top: 10px; 
+  font-family: 'Nunito';
+}
+
+#Informazioni{
+    font-family: 'Nunito';
+    text-align: justify;
+    padding-right: 293px;
+}
+
+#link a{
+    float:none;
+    color: black;
+    text-decoration: none;
+}
+
+#UPO{
+    font-family: 'Nunito';
+    text-align: justify;
+    font-size: 17px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    padding-bottom: 190px;
+}
+
+#UPO img{
+    width:79px;
+    height:50px;
+    -webkit-transition: width 2s, height 4s;
+    transition: width 2s, height 4s;
+}
+
+#UPO img:hover{
+    width: 80%;
+    height: 80%;
+}
+
+#Smarrimento{
+    margin-top: 90px;
+}
+
+#smarrimento{
+    margin-bottom: 100;
+}
+
+
+
+
+//////////////////////////
+ul#menu li {
+    display:inline;
+}

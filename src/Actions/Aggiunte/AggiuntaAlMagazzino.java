@@ -24,11 +24,11 @@ public class AggiuntaAlMagazzino extends Action {
         int N = database.NumeroProdotti();
         HashMap<Integer,Integer> hashMap = new HashMap<Integer, Integer>();
 
-        for(int i = 1; i< N;i++){
+        for(int i = 1; i<= N;i++){
             System.out.println(i);
             if(!request.getParameter("ordina" + i).equals("0") || request.getParameter("ordina" +(i)).contains("-")){
                // System.out.println(request.getParameter("ordina"+(i)));
-                Integer id = i+1;
+                Integer id = i;
                 // System.out.println(id);
                 Integer quantity = Integer.parseInt(request.getParameter("ordina"+(i)));
                // System.out.println(quantity);

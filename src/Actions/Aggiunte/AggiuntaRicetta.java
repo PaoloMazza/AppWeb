@@ -31,10 +31,14 @@ public class AggiuntaRicetta extends Action{
                 request.setAttribute("exitCode", "Medico non trovato nel sistema");
                 return mapping.findForward("ERROR");
             }else{
-                database.insertReceipt(CodiceRicetta,CodiceMedico,paziente,data);
-                database.insertInvoice(vendita.getProdotti(),login.getIdFarmacia(),String.valueOf(CodiceRicetta));
-                request.setAttribute("exitCode", "Ricetta inserita nel sistema");
-                return mapping.findForward("SUCCESS");
+                if(database.checkInvoice(CodiceRicetta,CodiceMedico,paziente)){
+                    database.insertInvoice(vendita.getProdotti(), login.getIdFarmacia(), String.valueOf(CodiceRicetta));
+                    request.setAttribute("exitCode", "Ricetta trovata, acquisto effettuato");
+                    return mapping.findForward("SUCCESS");
+                }else{
+                    request.setAttribute("exitCode", "Ricetta non trovata");
+                    return mapping.findForward("ERROR");
+                }
             }
         }
 

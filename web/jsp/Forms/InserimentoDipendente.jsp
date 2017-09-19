@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="${pageContext.request.contextPath}/style/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/style/css/style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Macondo|Nunito|Roboto|Shadows+Into+Light" rel="stylesheet">
     <meta charset="utf-8" />
     <title>Chi sono</title>
@@ -18,7 +18,7 @@
 <jsp:useBean id="InserimentoDipendente" scope="session" class="Beans.Farmacia"/>
 <div>
     <ul id="UL">
-        <img src="immagini/1503397977070.jpg" style="width: 4%; margin-left: 5px;padding: 1px;">
+        <img src="/style/images/1503397977070.jpg" style="width: 4%; margin-left: 5px;padding: 1px;">
         <div id="form">
             <li><a class="active" href="Login.html">Login
             </a>

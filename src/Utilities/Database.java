@@ -4,6 +4,7 @@ import Beans.Dipendente;
 import Beans.Farmacia;
 import Beans.Medico;
 import Beans.Paziente;
+import com.sun.org.apache.regexp.internal.RE;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.*;
@@ -265,7 +266,7 @@ public class Database {
         double finalPrice = 0;
         int counter = 0;
 
-        for(int i = 1; i< NumeroProdotti()+1; i++){
+        for(int i = 1; i<= NumeroProdotti(); i++){
             if(hashMap.containsKey(i)){
                 double price = getProductPrice(i);
                 String name = getProductname(i);
@@ -337,7 +338,8 @@ public class Database {
     private void incrementProductQuantity(int sum, int FarmacyId, int prodotto) throws SQLException {
         String query;
         PreparedStatement statement;
-        if(getProductQuantity(prodotto,FarmacyId) == 0) {
+
+        if(!productExists(prodotto,FarmacyId)) {
             query = "INSERT INTO Magazzino VALUES (?,?,?)";
             statement = conn.prepareStatement(query);
             statement.setInt(1,FarmacyId);
@@ -345,7 +347,7 @@ public class Database {
             statement.setInt(3,sum);
             statement.executeUpdate();
         }
-        else {
+       else{
             query = "UPDATE Magazzino SET QuantitaProdotto = QuantitaProdotto + ? WHERE IdFarmacia = ? AND CodiceProdotto = ?";
             statement = conn.prepareStatement(query);
             statement.setInt(1, sum);
@@ -381,6 +383,15 @@ public class Database {
 
 //FUNZIONI PER IL PRODOTTO
 
+    public boolean productExists(int prodotto, int pharmacyId) throws SQLException {
+    String query = "SELECT * FROM Magazzino WHERE idFarmacia = ? AND CodiceProdotto = ?";
+    PreparedStatement statement = conn.prepareStatement(query);
+    statement.setInt(1, pharmacyId);
+    statement.setInt(2,prodotto);
+    ResultSet resultSet= statement.executeQuery();
+    return resultSet.isBeforeFirst();
+    }
+
     public int NumeroProdotti(){
         int quantity = 0;
         String query = "SELECT DISTINCT * FROM Prodotto";
@@ -399,7 +410,6 @@ public class Database {
 
         return 0;
     }
-
 
     public int quantitàNelMagazzino(int id){
         int quantity = 0;
@@ -453,7 +463,6 @@ public class Database {
         }
         return null;
     }
-
 
     private Integer getProductQuantity(int idProdotto, int idFarmacia){
         String query = "SELECT QuantitaProdotto FROM Magazzino WHERE IdFarmacia = ? AND CodiceProdotto = ? ";
@@ -531,6 +540,16 @@ public class Database {
         psm2.setString(3,CodicePaziente);
         psm2.setString(4,data);;
         psm2.executeUpdate();
+    }
+
+    public boolean checkInvoice(Integer CodiceRicetta, Integer CodiceMedico, String CodicePaziente) throws SQLException {
+        String query = "SELECT CodiceRicetta FROM Ricetta WHERE CodiceRicetta = ? AND CodiceMedico = ? AND Paziente = ?";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setInt(1,CodiceRicetta);
+        statement.setInt(2,CodiceMedico);
+        statement.setString(3,CodicePaziente);
+        ResultSet resultSet = statement.executeQuery();
+        return resultSet.isBeforeFirst();
     }
 
 

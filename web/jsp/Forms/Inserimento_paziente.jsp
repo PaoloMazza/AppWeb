@@ -22,7 +22,7 @@
 <div>
     <ul id="UL">
         <li><a class="active" href="/jsp/Homes/HomeTitolare.jsp">Home</a></li>
-        <img src="immagini/1503397977070.jpg" style="width: 4%; margin-left: 5px;padding: 1px;">
+        <img src="/style/images/1503397977070.jpg" style="width: 4%; margin-left: 5px;padding: 1px;">
         <div id="form">
             <li><a><%= login.getNome() + " " + login.getCognome()%>
             </a>

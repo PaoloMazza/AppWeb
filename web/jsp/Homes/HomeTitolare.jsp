@@ -19,7 +19,7 @@
 
 <div>
     <ul id="UL">
-        <img src="immagini/1503397977070.jpg" style="width: 4%; margin-left: 5px;padding: 1px;">
+        <img src="/style/images/1503397977070.jpg" style="width: 4%; margin-left: 5px;padding: 1px;">
         <div id="form">
             <li><a><%= login.getNome() + " " + login.getCognome()%>
             </a>
@@ -40,7 +40,7 @@
 
 
 
-<div id="fine" style="margin-top: 300pt">
+<div id="fine" style="margin-top: 100pt">
     Applicazione web creata da: Paolo Mazza (20010255@studenti.uniupo.it)
 </div>
 </body>
