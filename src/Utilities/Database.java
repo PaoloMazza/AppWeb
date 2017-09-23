@@ -706,40 +706,40 @@ public class Database {
     private String fromNumberToMonth(String month){
         switch (month){
             case "1":
-                return "Gennaio";
+                return "\"Gennaio\"";
             case "2":
-                return "Febbraio";
+                return "\"Febbraio\"";
             case "3":
-                return "Marzo";
+                return "\"Marzo\"";
             case "4":
-                return "Aprile";
+                return "\"Aprile\"";
             case "5":
-                return "Maggio";
+                return "\"Maggio\"";
             case "6":
-                return "Giugno";
+                return "\"Giugno\"";
             case "7":
-                return "Luglio";
+                return "\"Luglio\"";
             case "8":
-                return "Agosto";
+                return "\"Agosto\"";
             case "9":
-                return "Settembre";
+                return "\"Settembre\"";
             case "10":
-                return "Ottobre";
+                return "\"Ottobre\"";
             case "11":
-                return "Novembre";
+                return "\"Novembre\"";
             case "12":
-                return "Dicembre";
+                return "\"Dicembre\"";
         }
         return null;
     }
 
 
 
-    public LinkedHashMap<Integer,Integer> getPurchaseStatistics(String begin, String end, int id) throws SQLException {
-        LinkedHashMap<Integer, Integer> statistics = new LinkedHashMap<>();
+    public LinkedHashMap<String,Integer> getPurchaseStatistics(String begin, String end, int id) throws SQLException {
+        LinkedHashMap<String, Integer> statistics = new LinkedHashMap<>();
 
         for(int j = Integer.parseInt(begin); j <= Integer.parseInt(end);j++) {
-            statistics.put(j, 0);
+            statistics.put(fromNumberToMonth(String.valueOf(j)), 0);
         }
 
         for(int i = Integer.parseInt(begin); i<= Integer.parseInt(end);i++) {
@@ -755,7 +755,7 @@ public class Database {
                     set.next();
                 }
                 //statistics.put(fromNumberToMonth(String.valueOf(i)), counter);
-                statistics.put(i,counter);
+                statistics.put(fromNumberToMonth(String.valueOf(i)),counter);
             }
         }
 
