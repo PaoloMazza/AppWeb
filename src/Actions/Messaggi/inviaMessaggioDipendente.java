@@ -40,7 +40,7 @@ public class inviaMessaggioDipendente extends Action{
                    request.setAttribute("exitCode", addressees[i] + "non è un dipendente della farmacia");
                    return mapping.findForward("ERROR");
                }
-           }else if(login.getIdFarmacia() != database.getEmployeePharmacyId(addressees[i])){
+           }else if(login.getIdFarmacia() != database.getEmployeePharmacyId(addressees[i]) && addressees[i].equals("ROOT")){
                request.setAttribute("exitCode", addressees[i] + "non è un dipendente della farmacia");
                return mapping.findForward("ERROR");
            }

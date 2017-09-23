@@ -164,3 +164,48 @@ th, td {
 
 }
 tr:nth-child(even){background-color: #f2f2f2}
+
+#Messaggio{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+
+.button {
+    background-color: white;
+    color: black;
+    font-size: 12pt;
+    border: 1px solid #4CAF50;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.button2 {
+    background-color: white;
+    color: black;
+    font-size: 7pt;
+    border: 1px solid red;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.button2:hover {
+    background-color: darkorange; /* Green */
+    color: white;
+}
+
+#grafico1{
+    display:block; float:left;
+    margin-left: 70pt;
+}
+
+#grafico2{
+    display: block;
+    float: right;
+    margin-right: 70pt;
+}

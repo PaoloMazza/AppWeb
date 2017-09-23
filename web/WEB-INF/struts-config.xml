@@ -34,11 +34,11 @@
             <forward name="SUCCESS" path="/jsp/Results/greetings.jsp" />
         </action>
 
-        <action path="/VenditaProdotti" type="Actions.VenditaProdotti">
+        <action path="/VenditaProdotti" type="Actions.ordine_vendita.VenditaProdotti">
             <forward name="DONE" path="/jsp/Results/ConfirmSale.jsp" />
         </action>
 
-        <action path="/AggiuntaFattura" type="Actions.ConfermaOrdine">
+        <action path="/AggiuntaFattura" type="Actions.ordine_vendita.ConfermaOrdine">
             <forward name="RECEIPT" path="/jsp/Results/Sale_error.jsp" />
             <forward name="ORDINE CONFERMATO" path="/jsp/Results/greetings.jsp" />
         </action>
@@ -70,6 +70,15 @@
         <action path="/InviareMessaggio" type="Actions.Messaggi.inviaMessaggioDipendente">
             <forward name="ERROR" path="/jsp/Results/MailError.jsp"/>
             <forward name="SUCCESS" path="/jsp/Results/greetings.jsp" />
+        </action>
+
+        <action path="/InviareMessaggio_RG" type="Actions.Messaggi.inviaMessaggioRegione">
+            <forward name="ERROR" path="/jsp/Results/MailError.jsp"/>
+            <forward name="SUCCESS" path="/jsp/Results/greetings.jsp" />
+        </action>
+
+        <action path="/LeggiMail" type="Actions.Messaggi.getMessaggio">
+            <forward name="SUCCESS" path="/jsp/Forms/messages/ShowMessage.jsp" />
         </action>
 
     </action-mappings>

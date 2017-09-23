@@ -5,13 +5,14 @@
   Time: 16.12
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Farmacia inserita</title>
+    <link href="${pageContext.request.contextPath}/style/css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Macondo|Nunito|Roboto|Shadows+Into+Light" rel="stylesheet">
+    <meta charset="utf-8" />
+    <title>Result</title>
 </head>
-<body>
 <jsp:useBean id="login" scope="session" class="Beans.Login"/>
 
 <%
@@ -44,5 +45,9 @@
         }
     %>
 <h1><h1 style="margin: auto; margin-top: 100px"><%= message%></h1></h1>
+
+<div id="fine" style="margin-top: 210pt">
+    Applicazione web creata da: Paolo Mazza (20010255@studenti.uniupo.it)
+</div>
 </body>
 </html>

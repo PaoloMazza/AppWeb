@@ -1,19 +1,14 @@
 package Utilities;
 
-import Beans.Dipendente;
-import Beans.Farmacia;
-import Beans.Medico;
-import Beans.Paziente;
+import Beans.*;
 import com.sun.org.apache.regexp.internal.RE;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
 
 public class Database {
 
@@ -568,7 +563,7 @@ public class Database {
                 String mittente = getNameSurname(resultSet.getString("mittente"));
                 String oggetto = resultSet.getString("oggetto");
                 String data = resultSet.getString("data");
-                result += "<form action=\"/LeggiMail.do\" method=\"post\"><tr><td><p name =id>" + id + "</p></td><td><p>" + mittente + "</p></td><td><p>" + oggetto + "</p></td><td><p>" + data + "</p></td><td> <button type=\"submit\">Rispondere</button></td>";
+                result += "<form action=\"/LeggiMail.do\" method=\"post\"><tr><td><input type=\"text\" value="+id+" name = \"id\" readonly></td><td><p>" + mittente + "</p></td><td><p>" + oggetto + "</p></td><td><p>" + data + "</p></td><td> <button type=\"submit\">Visualizzare</button></td></form>";
                 resultSet.next();
             }
         }
@@ -610,7 +605,7 @@ public class Database {
             resultSet.next();
             while (!resultSet.isAfterLast()) {
                 String name = resultSet.getString("Nome");
-                String surname = getNameSurname(resultSet.getString("Cognome"));
+                String surname = resultSet.getString("Cognome");
                 int farmacia = resultSet.getInt("IdFarmacia");
                 String cf = resultSet.getString("CFdipendente");
                 result += "<form action=\"/LeggiMail.do\" method=\"post\"><tr><td><p>" + name + "</p></td><td><p>" + surname + "</p></td><td><p>" + farmacia + "</p></td><td><p>" + cf + "</p></td></tr>";
@@ -642,6 +637,21 @@ public class Database {
 
     }
 
+    public Messaggi getMessageById(int code) throws Exception{
+        String query = "SELECT * FROM Messaggio WHERE idMessaggio = ? ";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setInt(1,code);
+        ResultSet set = statement.executeQuery();
+
+        set.next();
+        Messaggi messaggio = new Messaggi();
+        messaggio.setMittente(getNameSurname(set.getString("mittente")));
+        messaggio.setOggetto(set.getString("oggetto"));
+        messaggio.setMessaggio(set.getString("messaggio"));
+        return messaggio;
+
+    }
+
     //METODI PER I DIPENDENTI
 
     public int getEmployeePharmacyId(String cf){
@@ -660,7 +670,6 @@ public class Database {
         return 0;
     }
 
-
     public String getNameSurname(String cf){
         String query = "SELECT * FROM Dipendente WHERE CFdipendente = ? ";
         try {
@@ -675,6 +684,85 @@ public class Database {
         }
 
         return null;
+    }
+
+    public ArrayList<String> getAllContacts() throws SQLException {
+        ArrayList<String> contacts = new ArrayList<>();
+        String query = "SELECT * FROM Dipendente";
+        ResultSet set = ExecuteQuery(query);
+
+        set.next();
+        while(!set.isAfterLast()){
+            contacts.add(set.getString("CFdipendente"));
+            set.next();
+        }
+
+        return contacts;
+
+    }
+
+    //METODO PER STATISTICHE
+
+    private String fromNumberToMonth(String month){
+        switch (month){
+            case "1":
+                return "Gennaio";
+            case "2":
+                return "Febbraio";
+            case "3":
+                return "Marzo";
+            case "4":
+                return "Aprile";
+            case "5":
+                return "Maggio";
+            case "6":
+                return "Giugno";
+            case "7":
+                return "Luglio";
+            case "8":
+                return "Agosto";
+            case "9":
+                return "Settembre";
+            case "10":
+                return "Ottobre";
+            case "11":
+                return "Novembre";
+            case "12":
+                return "Dicembre";
+        }
+        return null;
+    }
+
+
+
+    public LinkedHashMap<Integer,Integer> getPurchaseStatistics(String begin, String end, int id) throws SQLException {
+        LinkedHashMap<Integer, Integer> statistics = new LinkedHashMap<>();
+
+        for(int j = Integer.parseInt(begin); j <= Integer.parseInt(end);j++) {
+            statistics.put(j, 0);
+        }
+
+        for(int i = Integer.parseInt(begin); i<= Integer.parseInt(end);i++) {
+            int counter = 0;
+            String query = "SELECT * FROM Ordine WHERE Data BETWEEN str_to_date('01-" + i + "-2017','%d-%m-%Y') AND str_to_date('31-" + (i) + "-2017','%d-%m-%Y') AND IdFarmacia = ?";
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setInt(1, id);
+            ResultSet set = statement.executeQuery();
+            if (set.isBeforeFirst()) {
+                set.next();
+                while (!set.isAfterLast()) {
+                    counter++;
+                    set.next();
+                }
+                //statistics.put(fromNumberToMonth(String.valueOf(i)), counter);
+                statistics.put(i,counter);
+            }
+        }
+
+        System.out.println(Arrays.toString(statistics.keySet().toArray()));
+        System.out.println(Arrays.toString(statistics.values().toArray()));
+
+        return statistics;
     }
 
 }

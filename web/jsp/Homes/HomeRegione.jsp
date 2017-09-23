@@ -24,6 +24,9 @@
         <div id="form">
             <li><a class="active" href="Login.html">Log out
             </a>
+                <form action="/logout.do" method="post" style="text-align: center">
+                    <input class="button2" type="submit" value="Logout" id="invio" />
+                </form>
         </div>
     </ul>
 </div>
@@ -31,7 +34,7 @@
 <h1 id="titolo">Account regione</h1>
 
 <ul id="HomeList" style="margin:auto; display: table; margin-top: 50pt; list-style-type: none;" >
-    <li><a class="active" href="/jsp/Forms/messages/MessagesPage.jsp" style="color: black;">Statistiche regionali</a></li>
+    <li><a class="active" href="/jsp/Forms/messages/MessagesPage_RG.jsp" style="color: black;">Statistiche regionali</a></li>
     <li><a class="active" href="/jsp/Forms/Inserimenti/Inserimento_farmacia.jsp" style="color: black;">Registrazione nuova farmacia</a></li>
 </ul>
 

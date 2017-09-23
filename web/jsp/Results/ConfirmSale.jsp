@@ -51,7 +51,7 @@
             </tbody>
         </table>
         <br><br>
-        <button type="Ordina">Ordina</button>
+        <button class="button" type="Ordina">Ordina</button>
     </div>
 </form>
 

@@ -1,9 +1,9 @@
-<%@ page import="Utilities.Database" %>
-<%@ page import="Beans.Login" %><%--
+<%@ page import="Beans.Login" %>
+<%@ page import="Beans.Messaggi" %><%--
   Created by IntelliJ IDEA.
   User: paolo
   Date: 19/09/17
-  Time: 16.08
+  Time: 19.00
   To change this template use File | Settings | File Templates.
 --%>
 <!DOCTYPE html>
@@ -16,10 +16,16 @@
 </head>
 
 
-<%String home = new String();%>
+
+
+
+<body vlink="white">
+<jsp:useBean id="login" scope="session" class="Beans.Login"/>
+<jsp:useBean id="messaggio" scope="session" class="Beans.Messaggi"/>
+
 <%
-    Login log = (Login) session.getAttribute("login");
-    switch (log.getTipo()){
+    String home = new String();
+    switch (login.getTipo()){
         case 1:
             home = "/jsp/Homes/HomeTitolare.jsp";
             break;
@@ -29,12 +35,8 @@
         case 3:
             home = "/jsp/Homes/HomeDF.jsp";
     }
-
 %>
 
-
-<body vlink="white">
-<jsp:useBean id="login" scope="session" class="Beans.Login"/>
 <div>
     <ul id="UL">
         <li><a class="active" href=<%=home%>>Home</a></li>
@@ -47,36 +49,16 @@
 </div>
 
 
-<h1 id="titolo">
-    I miei messaggi
-</h1>
-
-
-
-<div style="overflow-x:auto;">
-    <table id="lm">
-        <thead>
-        <tr>
-            <th>Numero messaggio</th>
-            <th>Mittente</th>
-            <th>Oggetto</th>
-            <th>Data</th>
-            <th>Azione</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% Database listamagazzino = Database.getInstance();%>
-        <%=listamagazzino.fillTableMessages(login.getCodiceFiscale())%>
-        </tbody>
-    </table>
-    <br><br>
+<div id="Messaggio">
+    <h2 ><%=messaggio.getMittente()%></h2><br>
+    <h3 ><%=messaggio.getOggetto()%>  </h3>
+    <p style="text-align: justify"><%=messaggio.getMessaggio()%> </p>
 </div>
-<br>
-<ul id="menu" style="display:inline; list-style-type: none; margin: auto">
-    <li><a class="button" href="/jsp/Forms/messages/newMessage.jsp" style="color: black;">Inviare nuovo messaggio</a></li>
-</ul>
 
-<div id="fine" style="margin-top: 210pt">
+
+
+
+<div id="fine" style="margin-top: 360pt">
     Applicazione web creata da: Paolo Mazza (20010255@studenti.uniupo.it)
 </div>
 </body>
