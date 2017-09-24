@@ -145,3 +145,88 @@ prova{
 ul#menu li {
     display:inline;
 }
+
+
+#lm{
+    background: lightskyblue;
+}
+
+table{
+    border-collapse: collapse;
+    width: 100%
+}
+table, tr {
+    border: 1px solid firebrick;
+    border-bottom: 1px solid black;
+}
+th, td {
+    text-align: center;
+    padding: 5px;
+
+}
+tr:nth-child(even){background-color: #f2f2f2}
+
+#Messaggio{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+
+.button {
+    background-color: white;
+    color: black;
+    font-size: 12pt;
+    border: 1px solid #4CAF50;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.button2 {
+    background-color: white;
+    color: black;
+    font-size: 7pt;
+    border: 1px solid red;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.button2:hover {
+    background-color: darkorange; /* Green */
+    color: white;
+}
+
+#grafico1{
+    display:block; float:left;
+    margin-left: 70pt;
+}
+
+#grafico2{
+    display: block;
+    float: right;
+    margin-right: 70pt;
+}
+
+#grafico3{
+    display:block; float:left;
+    margin-left: 70pt;
+    margin-top: 20pt;
+    clear: both;
+}
+
+#grafico4{
+    display: block;
+    float: right;
+    margin-right: 70pt;
+    clear: right;
+}
+
+
+
+#tabella{
+    clear: both;
+}

@@ -866,7 +866,7 @@ public class Database {
         return sortedMap;
     }
 
-    private Integer ReceiptProductSold(int id) throws SQLException {
+    public Integer ReceiptProductSold(int id) throws SQLException {
         Integer totalSold = 0, WithReceipt = 0;
 
         String query = "SELECT * FROM Fattura WHERE IdFarmacia = ?";
@@ -885,7 +885,7 @@ public class Database {
             }
         }
 
-        return totalSold%WithReceipt;
+        return 100 - WithReceipt%totalSold;
     }
 
 }

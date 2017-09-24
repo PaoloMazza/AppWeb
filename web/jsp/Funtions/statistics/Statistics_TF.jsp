@@ -297,7 +297,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr><td><%=database.getMostSeller(login.getIdFarmacia())%></td><td>d</td></tr>
+        <tr><td><%=database.getMostSeller(login.getIdFarmacia())%></td><td><%=database.ReceiptProductSold(login.getIdFarmacia())%></td></tr>
         </tbody>
     </table>
 
