@@ -31,11 +31,11 @@
 
 <%Database database = Database.getInstance();%>
 
-<h1 id="titolo">
-   VENDITA
+<h1 id="titolo" style="margin: auto; display: table; margin-top: 30pt">
+   Vendite e acquisti
 </h1>
 
-<div id="grafico1">
+<div id="grafico1" style="margin-top: 40pt">
     <h1>Numero acquisti</h1>
     <canvas id="myChart" style="background: beige; width:300px !important;
   height:300px !important;" >
@@ -47,10 +47,10 @@
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: <%=Arrays.toString(database.getPurchaseStatistics("1","12", login.getIdFarmacia()).keySet().toArray())%>,
+                labels: <%=Arrays.toString(database.getPurchaseStatistics("1","12","2017", login.getIdFarmacia(),1).keySet().toArray())%>,
                 datasets: [{
-                    label: '# of sales',
-                    data: <%=Arrays.toString(database.getPurchaseStatistics("1","12",login.getIdFarmacia()).values().toArray())%>,
+                    label: '# di acquisti effettuati',
+                    data: <%=Arrays.toString(database.getPurchaseStatistics("1","12","2017",login.getIdFarmacia(),1).values().toArray())%>,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -97,7 +97,7 @@
     </script>
 </div>
 
-<div id="grafico2">
+<div id="grafico2" style="margin-top: 40pt">
     <h1>Numero vendite</h1>
     <canvas id="myChart2" style="background: beige; width:300px !important;
   height:300px !important;" >
@@ -109,10 +109,10 @@
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels: <%=Arrays.toString(database.getPurchaseStatistics("1","12","2017", login.getIdFarmacia(),0).keySet().toArray())%>,
                 datasets: [{
-                    label: '# of sales',
-                    data: [12, 19, 3, 5, 2, 3],
+                    label: '# di fatture emesse',
+                    data: <%=Arrays.toString(database.getPurchaseStatistics("1","12","2017",login.getIdFarmacia(),0).values().toArray())%>,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -159,6 +159,147 @@
     </script>
 </div>
 
+<h1 id="titolo" style="margin: auto; display: table; margin-top: 350pt" >
+    Ricavi e guadagni
+</h1>
+
+<div id="grafico3">
+    <h1>Numero </h1>
+    <canvas id="myChart3" style="background: beige; width:300px !important;
+  height:300px !important;" >
+    </canvas>
+    <script>
+        var ctx = document.getElementById("myChart3").getContext('2d');
+        ctx.canvas.width =300;
+        ctx.canvas.height = 300;
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: <%=Arrays.toString(database.ricaviEVendite("1","12","2017", login.getIdFarmacia(),1).keySet().toArray())%>,
+                datasets: [{
+                    label: 'euro spesi per mese in acquisti',
+                    data: <%=Arrays.toString(database.ricaviEVendite("1","12","2017",login.getIdFarmacia(),1).values().toArray())%>,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                },
+                responsive: false
+            }
+        });
+
+    </script>
+</div>
+
+<div id="grafico4" style="margin-top: 20pt;">
+    <h1>Numero vendite</h1>
+    <canvas id="myChart4" style="background: beige; width:300px !important;
+  height:300px !important;" >
+    </canvas>
+    <script>
+        var ctx = document.getElementById("myChart4").getContext('2d');
+        ctx.canvas.width =300;
+        ctx.canvas.height = 300;
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: <%=Arrays.toString(database.ricaviEVendite("1","12","2017", login.getIdFarmacia(),0).keySet().toArray())%>,
+                datasets: [{
+                    label: 'ricavi per ogni mese',
+                    data: <%=Arrays.toString(database.ricaviEVendite("1","12","2017",login.getIdFarmacia(),0).values().toArray())%>,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                },
+                responsive: false
+            }
+        });
+
+    </script>
+</div>
+
+<p style="margin: auto; display: table;margin-top: 400pt;">Statistiche generali</p>
+
+    <table id = "lm" style="margin-top: 20pt">
+        <thead>
+        <tr>
+            <th>Dipendente che ha venduto di piu' durante questo mese</th>
+            <th>Percentuale di acquisti con ricetta (sul totale delle vendite)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr><td><%=database.getMostSeller(login.getIdFarmacia())%></td><td>d</td></tr>
+        </tbody>
+    </table>
 
 
 <div id="fine" style="margin-top: 410pt">

@@ -58,7 +58,7 @@ input{
 }
 
 #titolo{
-    color:chocolate;
+    color:chartreuse;
     top: 30px;
     position: relative;
     text-align: center;
@@ -209,3 +209,25 @@ tr:nth-child(even){background-color: #f2f2f2}
     float: right;
     margin-right: 70pt;
 }
+
+#grafico3{
+    display:block; float:left;
+    margin-left: 70pt;
+    margin-top: 20pt;
+    clear: both;
+}
+
+#grafico4{
+    display: block;
+    float: right;
+    margin-right: 70pt;
+    clear: right;
+}
+
+
+
+#tabella{
+    clear: both;
+}
+
+

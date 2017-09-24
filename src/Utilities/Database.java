@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 public class Database {
 
@@ -290,7 +291,7 @@ public class Database {
     }
 
 
-    public void insertInvoice(HashMap<Integer,Integer> prodotti, int id, String ricetta) throws SQLException {
+    public void insertInvoice(HashMap<Integer,Integer> prodotti, int id, String ricetta,String dipendente) throws SQLException {
 
         String insert = "";
         double finalPrice = 0;
@@ -315,13 +316,14 @@ public class Database {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         java.util.Date date = new Date();
 
-        String query = "INSERT INTO Fattura(IdFarmacia,Data,Prezzo,Ricetta,Articoli) Values (?,?,?,?,?)";
+        String query = "INSERT INTO Fattura(IdFarmacia,Data,Prezzo,Ricetta,Articoli,FattaDa) Values (?,?,?,?,?,?)";
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setInt(1,id);
         statement.setString(2,dateFormat.format(date));
         statement.setDouble(3,finalPrice);
         statement.setString(4,ricetta);
         statement.setString(5,insert);
+        statement.setString(6,dipendente);
         statement.executeUpdate();
     }
 
@@ -701,7 +703,7 @@ public class Database {
 
     }
 
-    //METODO PER STATISTICHE
+    //METODO PER STATISTICHE PER IL TITOLARE DELLA FARMACIA
 
     private String fromNumberToMonth(String month){
         switch (month){
@@ -734,9 +736,10 @@ public class Database {
     }
 
 
-
-    public LinkedHashMap<String,Integer> getPurchaseStatistics(String begin, String end, int id) throws SQLException {
+    //1 se acquisti, 0 se vendite
+    public LinkedHashMap<String,Integer> getPurchaseStatistics(String begin, String end, String year, int id, int type) throws SQLException {
         LinkedHashMap<String, Integer> statistics = new LinkedHashMap<>();
+        String query;
 
         for(int j = Integer.parseInt(begin); j <= Integer.parseInt(end);j++) {
             statistics.put(fromNumberToMonth(String.valueOf(j)), 0);
@@ -744,7 +747,12 @@ public class Database {
 
         for(int i = Integer.parseInt(begin); i<= Integer.parseInt(end);i++) {
             int counter = 0;
-            String query = "SELECT * FROM Ordine WHERE Data BETWEEN str_to_date('01-" + i + "-2017','%d-%m-%Y') AND str_to_date('31-" + (i) + "-2017','%d-%m-%Y') AND IdFarmacia = ?";
+
+            if(type==1){
+                query = "SELECT * FROM Ordine WHERE Data BETWEEN str_to_date('01-" + i + "-"+year+"','%d-%m-%Y') AND str_to_date('31-" + (i) + "-2017','%d-%m-%Y') AND IdFarmacia = ?";
+            }else {
+                query = "SELECT * FROM Fattura WHERE Data BETWEEN str_to_date('01-" + i + "-"+year+"','%d-%m-%Y') AND str_to_date('31-" + (i) + "-2017','%d-%m-%Y') AND IdFarmacia = ?";
+            }
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setInt(1, id);
             ResultSet set = statement.executeQuery();
@@ -754,15 +762,130 @@ public class Database {
                     counter++;
                     set.next();
                 }
-                //statistics.put(fromNumberToMonth(String.valueOf(i)), counter);
                 statistics.put(fromNumberToMonth(String.valueOf(i)),counter);
             }
         }
-
-        System.out.println(Arrays.toString(statistics.keySet().toArray()));
-        System.out.println(Arrays.toString(statistics.values().toArray()));
-
         return statistics;
+    }
+
+    public LinkedHashMap<String,Double> ricaviEVendite (String begin, String end, String year, int id, int type) throws SQLException {
+        LinkedHashMap<String, Double> statistics = new LinkedHashMap<>();
+        String query;
+
+        for(int j = Integer.parseInt(begin); j <= Integer.parseInt(end);j++) {
+            statistics.put(fromNumberToMonth(String.valueOf(j)), 0.0);
+        }
+
+
+        for(int i = Integer.parseInt(begin); i<= Integer.parseInt(end);i++) {
+            double counter = 0;
+
+            if(type==1){
+                query = "SELECT * FROM Ordine WHERE Data BETWEEN str_to_date('01-" + i + "-"+year+"','%d-%m-%Y') AND str_to_date('31-" + (i) + "-2017','%d-%m-%Y') AND IdFarmacia = ?";
+            }else {
+                query = "SELECT * FROM Fattura WHERE Data BETWEEN str_to_date('01-" + i + "-"+year+"','%d-%m-%Y') AND str_to_date('31-" + (i) + "-2017','%d-%m-%Y') AND IdFarmacia = ?";
+            }
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setInt(1, id);
+            ResultSet set = statement.executeQuery();
+            if (set.isBeforeFirst()) {
+                set.next();
+                counter += set.getDouble("Prezzo");
+                while (!set.isAfterLast()) {
+                    counter+=set.getDouble("Prezzo");
+                    set.next();
+                }
+                statistics.put(fromNumberToMonth(String.valueOf(i)),counter);
+            }
+        }
+        return statistics;
+
+
+    }
+
+    public String getMostSeller(int idFarmacia) throws Exception {
+        return getNameSurname(comparatorSellers(idFarmacia));
+    }
+
+    private String comparatorSellers(int id) throws Exception{
+        TreeMap<String, Integer> occorrenze = new TreeMap<>();
+
+        String query = "SELECT DISTINCT CFdipendente FROM Dipendente WHERE IdFarmacia = ?";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setInt(1,id);
+        ResultSet set1 = statement.executeQuery();
+
+        set1.next();
+        do{
+            occorrenze.put(set1.getString("CFdipendente"),0);
+            set1.next();
+        }while (!set1.isAfterLast());
+        set1.close();
+
+        String query2 = "SELECT * FROM Fattura WHERE IdFarmacia = ?";
+        PreparedStatement statement2 = conn.prepareStatement(query2);
+        statement2.setInt(1,id);
+        ResultSet set2 = statement2.executeQuery();
+
+        if(set2.isBeforeFirst()){
+            set2.next();
+            while (!set2.isAfterLast()){
+                System.out.println(set2.getDouble("Prezzo"));
+                occorrenze.put(set2.getString("FattaDa"),occorrenze.get(set2.getString("FattaDa"))+1);
+                set2.next();
+            }
+        }
+
+        Map<String, Integer> sortedHashMap = sortByValue(occorrenze);
+        String[] result = sortedHashMap.keySet().toArray(new String[sortedHashMap.keySet().size()]);
+        return result[0];
+    }
+
+    private static Map<String, Integer> sortByValue(Map<String, Integer> unsortMap) {
+
+        // 1. Convert Map to List of Map
+        List<Map.Entry<String, Integer>> list =
+                new LinkedList<Map.Entry<String, Integer>>(unsortMap.entrySet());
+
+        // 2. Sort list with Collections.sort(), provide a custom Comparator
+        //    Try switch the o1 o2 position for a different order
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+            public int compare(Map.Entry<String, Integer> o1,
+                               Map.Entry<String, Integer> o2) {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        // 3. Loop the sorted list and put it into a new insertion order Map LinkedHashMap
+        Map<String, Integer> sortedMap = new LinkedHashMap<String, Integer>();
+        for (Map.Entry<String, Integer> entry : list) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+
+
+        return sortedMap;
+    }
+
+    private Integer ReceiptProductSold(int id) throws SQLException {
+        Integer totalSold = 0, WithReceipt = 0;
+
+        String query = "SELECT * FROM Fattura WHERE IdFarmacia = ?";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setInt(1,id);
+
+        ResultSet set = statement.executeQuery();
+
+        if(set.isBeforeFirst()){
+            set.next();
+            while(!set.isAfterLast()){
+                totalSold +=1;
+                if(!set.getString("Ricetta").equals("-"))
+                    WithReceipt +=1;
+                set.next();
+            }
+        }
+
+        return totalSold%WithReceipt;
     }
 
 }

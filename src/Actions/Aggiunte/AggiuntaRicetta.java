@@ -32,7 +32,7 @@ public class AggiuntaRicetta extends Action{
                 return mapping.findForward("ERROR");
             }else{
                 if(database.checkInvoice(CodiceRicetta,CodiceMedico,paziente)){
-                    database.insertInvoice(vendita.getProdotti(), login.getIdFarmacia(), String.valueOf(CodiceRicetta));
+                    database.insertInvoice(vendita.getProdotti(), login.getIdFarmacia(), String.valueOf(CodiceRicetta),login.getCodiceFiscale());
                     request.setAttribute("exitCode", "Ricetta trovata, acquisto effettuato");
                     return mapping.findForward("SUCCESS");
                 }else{
