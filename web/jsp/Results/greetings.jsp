@@ -11,7 +11,7 @@
     <link href="${pageContext.request.contextPath}/style/css/style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Macondo|Nunito|Roboto|Shadows+Into+Light" rel="stylesheet">
     <meta charset="utf-8" />
-    <title>Result</title>
+    <title>result</title>
 </head>
 <jsp:useBean id="login" scope="session" class="Beans.Login"/>
 
@@ -26,6 +26,21 @@
     else if(login.getTipo() == 0)
         redirect= "4;/jsp/Homes/HomeRegione.jsp";
 %>
+<body vlink="white">
+<div>
+    <ul id="UL">
+        <li><a class="active" href="/jsp/Homes/HomeTitolare.jsp">Home</a></li>
+        <img src="immagini/1503397977070.jpg" style="width: 4%; margin-left: 5px;padding: 1px;">
+        <div id="form">
+            <li><a><%= login.getNome() + " " + login.getCognome()%>
+            </a>
+                <form action="/logout.do" method="post" style="text-align: center">
+                    <input class="button2" type="submit" value="Logout" id="invio" />
+                </form>
+        </div>
+    </ul>
+</div>
+
 
 <meta http-equiv="refresh" content= "<%=redirect%>" />
     <% String message = null;

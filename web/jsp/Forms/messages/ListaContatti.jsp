@@ -56,8 +56,17 @@
     <br><br>
 </div>
 <br>
+
+<%
+    String href;
+if(login.getTipo()==0)
+    href = "/jsp/Forms/messages/newMessage_RG.jsp";
+else
+    href = "/jsp/Forms/messages/newMessage.jsp";
+
+%>
 <ul id="menu" style="display:inline; list-style-type: none; margin: auto; display: block">
-    <li><a class="active" href="/jsp/Forms/messages/MessagesPage.jsp" style="color: black;">Ritornare ai messaggi</a></li>
+    <li><a class="active" href="<%=href%>" style="color: black;">Ritornare ai messaggi</a></li>
 </ul>
 
 <div id="fine" style="margin-top: 210pt">

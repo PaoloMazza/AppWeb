@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Macondo|Nunito|Roboto|Shadows+Into+Light" rel="stylesheet">
     <meta charset="utf-8" />
     <script src="/style/js/Chart.js" type="text/javascript"></script>
-    <title>Warehouse</title>
+    <title>Statistiche</title>
 </head>
 
 <body vlink="white">
@@ -302,7 +302,7 @@
     </table>
 
 
-<div id="fine" style="margin-top: 410pt">
+<div id="fine" style="margin-top: 50pt">
     Applicazione web creata da: Paolo Mazza (20010255@studenti.uniupo.it)
 </div>
 

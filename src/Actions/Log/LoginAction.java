@@ -34,6 +34,7 @@ public class LoginAction extends Action {
             login.setCognome(utente.getString("Cognome"));
             login.setIdFarmacia(utente.getInt("IdFarmacia"));
             login.setTipo(utente.getInt("TipoDipendente"));
+            login.setMail(utente.getString("Mail"));
             session.setAttribute("login",login);
         }
 
@@ -42,7 +43,6 @@ public class LoginAction extends Action {
 
             case 0:
                 return (mapping.findForward("REGIONE"));
-
             case 1: //TITOLARE
                 return (mapping.findForward("TITOLARE"));
             case 2: //Dottore Farmacista

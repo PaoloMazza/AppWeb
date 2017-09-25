@@ -550,6 +550,22 @@ public class Database {
 
     //METODI PER I MESSAGGI
 
+    public boolean MailExists(String mail) throws Exception{
+        String query = "SELECT DISTINCT * FROM Dipendente WHERE Mail = ?";
+        PreparedStatement psm = conn.prepareStatement(query);
+        psm.setString(1, mail);
+        return psm.executeQuery().isBeforeFirst();
+    }
+
+    public String getUserByMail(String mail) throws SQLException{
+        String query = "SELECT DISTINCT * FROM Dipendente WHERE Mail = ?";
+        PreparedStatement psm = conn.prepareStatement(query);
+        psm.setString(1, mail);
+        ResultSet resultSet = psm.executeQuery();
+        resultSet.next();
+        return resultSet.getString("CFdipendente");
+    }
+
     public String fillTableMessages(String CF){
         String query = "SELECT * FROM Messaggio WHERE destinatario = ? ORDER BY data DESC ";
         String result = "";
@@ -562,7 +578,7 @@ public class Database {
               resultSet.next();
                while (!resultSet.isAfterLast()) {
                 int id = resultSet.getInt("idMessaggio");
-                String mittente = getNameSurname(resultSet.getString("mittente"));
+                String mittente = getNameSurname(database.getUserByMail(resultSet.getString("mittente")));
                 String oggetto = resultSet.getString("oggetto");
                 String data = resultSet.getString("data");
                 result += "<form action=\"/LeggiMail.do\" method=\"post\"><tr><td><input type=\"text\" value="+id+" name = \"id\" readonly></td><td><p>" + mittente + "</p></td><td><p>" + oggetto + "</p></td><td><p>" + data + "</p></td><td> <button type=\"submit\">Visualizzare</button></td></form>";
@@ -609,7 +625,7 @@ public class Database {
                 String name = resultSet.getString("Nome");
                 String surname = resultSet.getString("Cognome");
                 int farmacia = resultSet.getInt("IdFarmacia");
-                String cf = resultSet.getString("CFdipendente");
+                String cf = resultSet.getString("Mail");
                 result += "<form action=\"/LeggiMail.do\" method=\"post\"><tr><td><p>" + name + "</p></td><td><p>" + surname + "</p></td><td><p>" + farmacia + "</p></td><td><p>" + cf + "</p></td></tr>";
                 resultSet.next();
             }

@@ -11,7 +11,7 @@
     <link href="${pageContext.request.contextPath}/style/css/style2.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Macondo|Nunito|Roboto|Shadows+Into+Light" rel="stylesheet">
     <meta charset="utf-8" />
-    <title>Home regione</title>
+    <title>Home</title>
 </head>
 
 <body vlink="white">

@@ -12,7 +12,7 @@
     <link href="${pageContext.request.contextPath}/style/css/style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Macondo|Nunito|Roboto|Shadows+Into+Light" rel="stylesheet">
     <meta charset="utf-8" />
-    <title>Warehouse</title>
+    <title>Messages</title>
 </head>
 
 
@@ -69,7 +69,7 @@
         </thead>
         <tbody>
         <% Database listamagazzino = Database.getInstance();%>
-        <%=listamagazzino.fillTableMessages(login.getCodiceFiscale())%>
+        <%=listamagazzino.fillTableMessages(login.getMail())%>
         </tbody>
     </table>
     <br><br>

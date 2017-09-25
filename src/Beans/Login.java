@@ -3,7 +3,7 @@ package Beans;
 import org.apache.struts.action.ActionForm;
 
 public class Login extends ActionForm {
-    private String CodiceFiscale, Password, Nome, Cognome;
+    private String CodiceFiscale, Password, Nome, Cognome, Mail;
     int IdFarmacia, Tipo;
 
     public String getCodiceFiscale() {
@@ -24,6 +24,14 @@ public class Login extends ActionForm {
 
     public String getNome() {
         return Nome;
+    }
+
+    public String getMail() {
+        return Mail;
+    }
+
+    public void setMail(String mail) {
+        Mail = mail;
     }
 
     public void setNome(String nome) {

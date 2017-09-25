@@ -11,7 +11,7 @@
     <link href="${pageContext.request.contextPath}/style/css/style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Macondo|Nunito|Roboto|Shadows+Into+Light" rel="stylesheet">
     <meta charset="utf-8" />
-    <title>Chi sono</title>
+    <title>Home</title>
 </head>
 
 <body vlink="white">
@@ -36,7 +36,6 @@
     <br>
     <li><a class="active" href="/jsp/Funtions/Sales.jsp" style="color: black;">Vendita Prodotti</a></li>
     <br>
-    <li><a class="active" href="" style="color: black;">Inserimento pazienti</a></li>
 </ul>
 
 

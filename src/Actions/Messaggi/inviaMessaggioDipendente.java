@@ -31,23 +31,23 @@ public class inviaMessaggioDipendente extends Action{
         }
 
         for(int i = 0; i<addressees.length;i++){
-            if(!database.UserExists(addressees[i])){
+            if(!database.MailExists(addressees[i])){
                 request.setAttribute("exitCode","Dipendente "+addressees[i] +"non trovato");
                 return mapping.findForward("ERROR");
             }
            if(login.getTipo() != 1) {
-               if (login.getIdFarmacia() != database.getEmployeePharmacyId(addressees[i])) {
+               if (login.getIdFarmacia() != database.getEmployeePharmacyId(database.getUserByMail(addressees[i]))) {
                    request.setAttribute("exitCode", addressees[i] + "non è un dipendente della farmacia");
                    return mapping.findForward("ERROR");
                }
-           }else if(login.getIdFarmacia() != database.getEmployeePharmacyId(addressees[i]) && addressees[i].equals("ROOT")){
+           }else if(login.getIdFarmacia() != database.getEmployeePharmacyId(database.getUserByMail(addressees[i])) && database.getUserByMail(addressees[i]).equals("ROOT")){
                request.setAttribute("exitCode", addressees[i] + "non è un dipendente della farmacia");
                return mapping.findForward("ERROR");
            }
         }
 
         try{
-            database.sendMessage(login.getCodiceFiscale(),addressees,oggetto,messaggio);
+            database.sendMessage(login.getMail(),addressees,oggetto,messaggio);
             request.setAttribute("exitCode","Messaggio inviato");
             return mapping.findForward("SUCCESS");
         }catch (Exception e){
