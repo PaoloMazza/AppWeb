@@ -22,12 +22,12 @@ public class LoginAction extends Action {
 
         if(!utente.isBeforeFirst()){
             System.out.println("Utente non trovato");
-            request.setAttribute("exitCode","Codice fiscale o password errate!");
+            request.setAttribute("exitCode","Mail e/o password errate!");
             return mapping.findForward("ERROR");
         }else {
             utente.next();
             HttpSession session = request.getSession();
-            login.setCodiceFiscale(request.getParameter("CFTitolare"));
+            login.setCodiceFiscale(utente.getString("CFdipendente"));
             System.out.println(login.getCodiceFiscale());
             login.setPassword(request.getParameter("Password"));
             login.setNome(utente.getString("Nome"));

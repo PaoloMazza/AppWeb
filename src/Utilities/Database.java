@@ -124,10 +124,10 @@ public class Database {
 
     //METODI PER IL LOGIN
 
-    public ResultSet Login(String CF, String Password) throws SQLException {
-        String query =  "SELECT DISTINCT * FROM Dipendente WHERE CFdipendente = ? AND Password = ?";
+    public ResultSet Login(String Mail, String Password) throws SQLException {
+        String query =  "SELECT DISTINCT * FROM Dipendente WHERE Mail = ? AND Password = ?";
         PreparedStatement preparedStatement = conn.prepareStatement(query);
-        preparedStatement.setString(1,CF);
+        preparedStatement.setString(1,Mail);
         preparedStatement.setString(2,Password);
         return preparedStatement.executeQuery();
     }
