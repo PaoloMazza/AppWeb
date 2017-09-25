@@ -22,6 +22,9 @@
         <div id="form">
             <li><a class="active" href="Login.html">Log out
             </a>
+                <form action="/logout.do" method="post" style="text-align: center">
+                    <input class="button2" type="submit" value="Logout" id="invio" />
+                </form>
         </div>
     </ul>
 </div>

@@ -26,6 +26,9 @@
         <div id="form">
             <li><a><%= login.getNome() + " " + login.getCognome()%>
             </a>
+                <form action="/logout.do" method="post" style="text-align: center">
+                    <input class="button2" type="submit" value="Logout" id="invio" />
+                </form>
         </div>
     </ul>
 </div>

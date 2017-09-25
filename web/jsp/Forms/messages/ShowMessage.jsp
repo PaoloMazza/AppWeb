@@ -49,10 +49,15 @@
 </div>
 
 
-<div id="Messaggio">
-    <h2 ><%=messaggio.getMittente()%></h2><br>
-    <h3 ><%=messaggio.getOggetto()%>  </h3>
-    <p style="text-align: justify"><%=messaggio.getMessaggio()%> </p>
+<div style="margin: auto; display: block; margin-left: 400pt; margin-top: 100pt">
+    mittente: <br>
+    <textarea name="destinatari" style="border-radius: 10px; width: 30%;" readonly><%=messaggio.getMittente()%></textarea><br>
+    oggetto:<br>
+    <textarea name="oggetto" style="border-radius: 10px; width: 30%;" readonly><%=messaggio.getOggetto()%></textarea><br>
+
+    messaggio<br><textarea name="messaggio" cols="30" rows="10" id="testo" class="txt" readonly><%=messaggio.getMessaggio()%></textarea>
+    <br><br>
+
 </div>
 
 

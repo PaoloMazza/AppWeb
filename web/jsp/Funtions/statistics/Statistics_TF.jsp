@@ -38,7 +38,7 @@
 <div id="grafico1" style="margin-top: 40pt">
     <h1>Numero acquisti</h1>
     <canvas id="myChart" style="background: beige; width:300px !important;
-  height:300px !important;" >
+  height:300px !important;border-style: solid; border-width: 2px; border-color: turquoise;" >
     </canvas>
     <script>
         var ctx = document.getElementById("myChart").getContext('2d');
@@ -100,7 +100,7 @@
 <div id="grafico2" style="margin-top: 40pt">
     <h1>Numero vendite</h1>
     <canvas id="myChart2" style="background: beige; width:300px !important;
-  height:300px !important;" >
+  height:300px !important; border-style: solid; border-width: 2px; border-color: turquoise;" >
     </canvas>
     <script>
         var ctx = document.getElementById("myChart2").getContext('2d');
@@ -166,7 +166,7 @@
 <div id="grafico3">
     <h1>Numero </h1>
     <canvas id="myChart3" style="background: beige; width:300px !important;
-  height:300px !important;" >
+  height:300px !important; border-style: solid; border-width: 2px; border-color: turquoise;" >
     </canvas>
     <script>
         var ctx = document.getElementById("myChart3").getContext('2d');
@@ -228,7 +228,7 @@
 <div id="grafico4" style="margin-top: 20pt;">
     <h1>Numero vendite</h1>
     <canvas id="myChart4" style="background: beige; width:300px !important;
-  height:300px !important;" >
+  height:300px !important; border-style: solid; border-width: 2px; border-color: turquoise;" >
     </canvas>
     <script>
         var ctx = document.getElementById("myChart4").getContext('2d');

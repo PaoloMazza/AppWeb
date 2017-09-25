@@ -36,9 +36,9 @@
 <div>
     <jsp:useBean id="Login" scope="session" class="Beans.Login"/>
     <form action="/Login.do" style="margin: auto; display: block; margin-left: 400pt; margin-top: 100pt">
-        First name:<br>
+        Codice fiscale:<br>
         <input type="text" name="CFTitolare" style="border-radius: 10px; width: 30%;"><br>
-        Last name:<br>
+        Password:<br>
         <input type="password" name="Password" style="border-radius: 10px; width: 30%;"><br>
         <input type="submit" value="LOGIN" style = "margin-top: 15px">
     </form>
