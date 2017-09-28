@@ -51,7 +51,7 @@
         </thead>
         <tbody>
         <% Database listamagazzino = Database.getInstance();%>
-        <%=listamagazzino.fillTableMessages(login.getCodiceFiscale())%>
+        <%=listamagazzino.fillTableMessages(login.getMail())%>
         </tbody>
     </table>
     <br><br>

@@ -1,6 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: paolo
+  Date: 26/09/17
+  Time: 17.47
+  To change this template use File | Settings | File Templates.
+--%>
+<%--
+  Created by IntelliJ IDEA.
+  User: paolo
   Date: 15/09/17
   Time: 18.05
   To change this template use File | Settings | File Templates.
@@ -27,7 +34,7 @@
     </ul>
 </div>
 
-<meta http-equiv="refresh" content= "<%="4;/jsp/Forms/Inserimenti/Inserimento_Ricetta.jsp"%>" />
+<meta http-equiv="refresh" content= "<%="4;/jsp/Functions/Sales.jsp"%>" />
 
 <h1 id="titolo"><%= (String)request.getAttribute("exitCode")%></h1>
 

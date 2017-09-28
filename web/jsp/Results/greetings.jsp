@@ -59,9 +59,9 @@
             message = "LoginAction non effettuata";
         }
     %>
-<h1><h1 style="margin: auto; margin-top: 100px"><%= message%></h1></h1>
+<h1><h1 style="margin: auto;display: table; margin-top: 100px"><%= message%></h1></h1>
 
-<div id="fine" style="margin-top: 210pt">
+<div id="fine" style="margin-top: 280pt">
     Applicazione web creata da: Paolo Mazza (20010255@studenti.uniupo.it)
 </div>
 </body>

@@ -36,6 +36,7 @@
 
         <action path="/VenditaProdotti" type="Actions.ordine_vendita.VenditaProdotti">
             <forward name="DONE" path="/jsp/Results/ConfirmSale.jsp" />
+            <forward name="ERROR" path="/jsp/Results/Products_error.jsp" />
         </action>
 
         <action path="/AggiuntaFattura" type="Actions.ordine_vendita.ConfermaOrdine">

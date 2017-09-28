@@ -6,10 +6,22 @@
   Time: 19.00
   To change this template use File | Settings | File Templates.
 --%>
+<jsp:useBean id="login" scope="session" class="Beans.Login"/>
+<jsp:useBean id="messaggio" scope="session" class="Beans.Messaggi"/>
+<%
+    String css = new String();
+    if(login.getTipo()== 0)
+        css = "/style/css/style2.css";
+    else
+        css = "/style/css/style.css";
+
+
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="${pageContext.request.contextPath}/style/css/style.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}<%=css%>" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Macondo|Nunito|Roboto|Shadows+Into+Light" rel="stylesheet">
     <meta charset="utf-8" />
     <title>Messages</title>
@@ -20,12 +32,13 @@
 
 
 <body vlink="white">
-<jsp:useBean id="login" scope="session" class="Beans.Login"/>
-<jsp:useBean id="messaggio" scope="session" class="Beans.Messaggi"/>
 
 <%
     String home = new String();
     switch (login.getTipo()){
+        case 0:
+            home = "/jsp/Homes/HomeRegione.jsp";
+            break;
         case 1:
             home = "/jsp/Homes/HomeTitolare.jsp";
             break;

@@ -21,6 +21,12 @@ public class inviaMessaggioRegione extends Action {
         String oggetto = request.getParameter("oggetto");
         String messaggio = request.getParameter("messaggio");
 
+        System.out.println("ii");
+        for(int i = 0; i < addressees.length;i++) {
+            System.out.println(addressees[i]);
+            addressees[i].replace("\\\\s+", "");
+        }
+        System.out.println("ii");
 
         if(addressees.equals(null)){
             request.setAttribute("exitCode","Inserire almeno un destinatario");
@@ -44,7 +50,7 @@ public class inviaMessaggioRegione extends Action {
             }
         }else {
             try{
-                database.sendMessage(login.getCodiceFiscale(),addressees,oggetto,messaggio);
+                database.sendMessage(login.getMail(),addressees,oggetto,messaggio);
                 request.setAttribute("exitCode","Messaggio inviato");
                 return mapping.findForward("SUCCESS");
             }catch (Exception e){

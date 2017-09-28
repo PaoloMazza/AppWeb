@@ -16,13 +16,10 @@
 
 <body vlink="white">
 
-<img src="/immagini/1503397977070.jpgstyle/images/1503397977070.jpg" alt="some_text" style="width:100pt;height:100pt; margin:auto; display: block;">
-
 <div>
     <ul id="UL">
         <img src="/style/images/1503397977070.jpg" style="width: 4%; margin-left: 5px;padding: 1px;">
         <div id="form">
-            <li><a class="active" href="Login.html">Log out
             </a>
                 <form action="/logout.do" method="post" style="text-align: center">
                     <input class="button2" type="submit" value="Logout" id="invio" />
@@ -41,7 +38,7 @@
 
 
 
-<div id="fine" style="margin-top: 110pt">
+<div id="fine" style="margin-top: 150pt">
     Applicazione web creata da: Paolo Mazza (20010255@studenti.uniupo.it)
 </div>
 </body>

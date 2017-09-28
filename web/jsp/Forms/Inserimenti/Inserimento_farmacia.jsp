@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link href="/style/css/style.css" rel="stylesheet" type="text/css">
+  <link href="/style/css/style2.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Macondo|Nunito|Roboto|Shadows+Into+Light" rel="stylesheet">
   <meta charset="utf-8" />
   <title>Registrazione farmacia</title>

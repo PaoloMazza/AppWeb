@@ -526,6 +526,17 @@ public class Database {
         return ThereIsAReceipt;
     }
 
+    public Double total(HashMap<Integer,Integer> products){
+        Double tot = 0.0;
+        Integer keys[] = products.keySet().toArray(new Integer[products.size()]);
+        Integer quantities[] = products.values().toArray(new Integer[products.size()]);
+
+        for(int i = 0; i< keys.length;i++) {
+            tot += getProductPrice(keys[i])* quantities[i];
+        }
+        return tot;
+    }
+
     //FUNZIONE PER REGISTRARE LA RICETTA
 
     public void insertReceipt(Integer CodiceRicetta, Integer CodiceMedico, String CodicePaziente, String data) throws SQLException {
@@ -663,7 +674,7 @@ public class Database {
 
         set.next();
         Messaggi messaggio = new Messaggi();
-        messaggio.setMittente(getNameSurname(set.getString("mittente")));
+        messaggio.setMittente(getNameSurname(database.getUserByMail(set.getString("mittente"))));
         messaggio.setOggetto(set.getString("oggetto"));
         messaggio.setMessaggio(set.getString("messaggio"));
         return messaggio;

@@ -38,28 +38,28 @@
             <br>
             <br>
             <div>
-                <label for="Nome">Nome </label>
+                <label for="Nome" style="margin-left:125px;">Nome </label>
                 <input type="text" id="Nome" name="Nome" style="width: 180px;">
             </div>
             <br>
             <div>
-                <label for="Cognome">Cognome </label>
+                <label for="Cognome" style="margin-left:102px;">Cognome </label>
                 <input type="text" id="Cognome" name="Cognome" style="width: 180px;">
                 <br>
             </div>
             <br>
             <div>
-                <label for="Indirizzo">Indirizzo</label>
+                <label for="Indirizzo" style="margin-left:105px;">Indirizzo</label>
                 <input type="text" id="Indirizzo" name="Indirizzo"style="width: 180px;">
             </div>
             <br>
             <div>
-                <label for="Mail">Mail</label>
+                <label for="Mail" style="margin-left:131px;">Mail</label>
                 <input type="text" id="Mail" name="Mail" style="width: 180px;">
             </div>
             <br>
             <div>
-                <label for="Password">Password Titolare</label>
+                <label for="Password" style="margin-left:45px;">Password Titolare</label>
                 <input type="text" id="Password" name="Password">
             </div>
         </div>
